@@ -38,12 +38,5 @@ export class CreateProductoDto {
   @IsInt()
   @Min(0)
   readonly stock: number;
-
-  @ApiProperty()
-  @IsNotEmpty({ message: 'El campo categoria no debe ser vacío' })
-  @IsString({ message: 'El campo categoria debe ser de tipo cadena' })
-  @MaxLength(100, { message: 'El campo categoria no debe ser mayor a 100 caracteres' })
-  @MinLength(5, { message: 'El campo categoria no debe ser menor a 5 caracteres' })
-  readonly categoria: string;
 }
 
