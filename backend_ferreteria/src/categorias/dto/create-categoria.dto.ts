@@ -1,5 +1,5 @@
 import { ApiProperty } from '@nestjs/swagger';
-import { IsNotEmpty, IsString, MaxLength, MinLength } from 'class-validator';
+import { IsDefined, IsNotEmpty, IsNumber, IsString, MaxLength, MinLength } from 'class-validator';
 
 export class CreateCategoriaDto {
   @ApiProperty()
@@ -8,5 +8,10 @@ export class CreateCategoriaDto {
   @MaxLength(100, { message: 'El campo descripcion no debe ser mayor a 100 caracteres' })
   @MinLength(5, { message: 'El campo descripcion no debe ser menor a 5 caracteres' })
   readonly descripcion: string;
+
+  @ApiProperty()
+  @IsDefined({ message: 'El campo idCategoria debe estar definido' })
+  @IsNumber({}, { message: 'El campo idCategoria debe ser de tipo numérico' })
+  readonly idCategoria: number;
 }
 

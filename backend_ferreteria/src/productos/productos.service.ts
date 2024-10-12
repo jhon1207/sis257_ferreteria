@@ -4,6 +4,7 @@ import { UpdateProductoDto } from './dto/update-producto.dto';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Producto } from './entities/producto.entity';
 import { Repository } from 'typeorm';
+import { Categoria } from 'src/categorias/entities/categoria.entity';
 
 @Injectable()
 export class ProductosService {
@@ -13,6 +14,7 @@ export class ProductosService {
     const existe = await this.productosRepository.findOneBy({
       nombreProducto: createProductoDto.nombreProducto.trim(),
       descripcion: createProductoDto.descripcion.trim(),
+      categoria: { id: createProductoDto.idCategoria },
     });
 
     if (existe) {
@@ -24,25 +26,34 @@ export class ProductosService {
       descripcion: createProductoDto.descripcion.trim(),
       precio: createProductoDto.precio,
       stock: createProductoDto.stock,
+      categoria: { id: createProductoDto.idCategoria },
     });
   }
 
   async findAll(): Promise<Producto[]> {
-    return this.productosRepository.find();
+    return this.productosRepository.find({ relations: ['categoria'] });
+  }
+
+  async findAllByCliente(idCategoria): Promise<Producto[]> {
+    return this.productosRepository.findBy({ categoria: { id: idCategoria } });
   }
 
   async findOne(id: number): Promise<Producto> {
-    const cliente = await this.productosRepository.findOneBy({ id });
-    if (!cliente) {
-      throw new NotFoundException(`El cliente ${id} no existe`);
+    const producto = await this.productosRepository.findOne({
+      where: { id },
+      relations: ['categoria'],
+    });
+    if (!producto) {
+      throw new NotFoundException(`La producto ${id} no existe`);
     }
-    return cliente;
+    return producto;
   }
 
   async update(id: number, updateProductoDto: UpdateProductoDto): Promise<Producto> {
     const producto = await this.findOne(id);
-    const clienteUpdate = Object.assign(producto, updateProductoDto);
-    return this.productosRepository.save(clienteUpdate);
+    const productoUpdate = Object.assign(producto, updateProductoDto);
+    productoUpdate.categoria = { id: updateProductoDto.idCategoria } as Categoria;
+    return this.productosRepository.save(productoUpdate);
   }
 
   async remove(id: number) {
