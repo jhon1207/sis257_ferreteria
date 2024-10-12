@@ -27,7 +27,13 @@ Registra y gestiona la información de los clientes de la ferretería.
 - **email**: Correo electrónico del cliente.
 - **direccion**: Dirección del cliente.
 
-### 3. Producto
+### 3. Categorias
+Gestiona las categorias disponibles en el inventario de la ferretería.
+
+- **id_categoria**: ID único de la categoria.
+- **descripcion**: Descripción breve de la categoria.
+
+### 4. Producto
 Gestiona los productos disponibles en el inventario de la ferretería.
 
 - **id_producto**: ID único del producto.
@@ -35,9 +41,9 @@ Gestiona los productos disponibles en el inventario de la ferretería.
 - **descripcion**: Descripción breve del producto.
 - **precio**: Precio unitario del producto.
 - **stock**: Cantidad disponible en inventario.
-- **categoria**: Categoría del producto (ej. herramientas, materiales de construcción).
+- **id_categoria**: ID único de la categoria.
 
-### 4. Venta
+### 5. Venta
 Registra las ventas realizadas en la ferretería.
 
 - **id_venta**: ID único de la venta.
@@ -46,7 +52,7 @@ Registra las ventas realizadas en la ferretería.
 - **total**: Monto total de la venta.
 - **id_usuario**: ID del usuario que registra la venta.
 
-### 5. Detalle_Venta
+### 6. Detalle_Venta
 Almacena los detalles específicos de cada venta, incluyendo los productos vendidos.
 
 - **id_detalle**: ID único del detalle de la venta.
