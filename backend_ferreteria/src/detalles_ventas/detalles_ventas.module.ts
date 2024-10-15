@@ -1,12 +1,14 @@
 import { Module } from '@nestjs/common';
-import { DetallesVentasService } from './detalles_ventas.service'; // Cambia al servicio correcto
-import { DetallesVentasController } from './detalles_ventas.controller'; // Cambia al controlador correcto
 import { TypeOrmModule } from '@nestjs/typeorm';
-import { DetalleVenta } from './entities/detalles_venta.entity'; // Cambia a la entidad correcta
+import { DetalleVenta } from './entities/detalles_venta.entity';
+import { Producto } from '../productos/entities/producto.entity';
+import { DetallesVentasService } from './detalles_ventas.service';
+import { DetallesVentasController } from './detalles_ventas.controller';
+import { VentasModule } from '../ventas/ventas.module';
 
 @Module({
-  imports: [TypeOrmModule.forFeature([DetalleVenta])],
+  imports: [TypeOrmModule.forFeature([DetalleVenta, Producto]), VentasModule],
   controllers: [DetallesVentasController],
   providers: [DetallesVentasService],
 })
-export class DetallesVentasModule {} // Cambia el nombre del módulo
+export class DetallesVentasModule {}

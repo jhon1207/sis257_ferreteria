@@ -21,16 +21,16 @@ export class DetallesVentasController {
 
   @Get(':id')
   findOne(@Param('id') id: string) {
-    return this.detallesVentasService.findOne(+id);
+    return this.detallesVentasService.findOne(id);
   }
 
   @Patch(':id')
   update(@Param('id') id: string, @Body() updateDetallesVentaDto: UpdateDetallesVentaDto) {
-    return this.detallesVentasService.update(+id, updateDetallesVentaDto);
+    return this.detallesVentasService.update(id, updateDetallesVentaDto);
   }
 
   @Delete(':id')
   remove(@Param('id') id: string) {
-    return this.detallesVentasService.remove(+id);
+    return this.detallesVentasService.remove(id);
   }
 }

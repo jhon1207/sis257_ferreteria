@@ -30,7 +30,7 @@ export class Venta {
   usuario: Usuario;
 
   @OneToMany(() => DetalleVenta, detalleVenta => detalleVenta.venta, { cascade: true })
-  detalleVentas: DetalleVenta[]; // Relación uno a muchos con DetalleVenta
+  detalleVentas: DetalleVenta[];
 
   @CreateDateColumn({ name: 'fecha_creacion' })
   fechaCreacion: Date;

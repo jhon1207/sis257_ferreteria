@@ -7,26 +7,26 @@ import {
   PrimaryGeneratedColumn,
   UpdateDateColumn,
 } from 'typeorm';
-import { Venta } from '../../ventas/entities/venta.entity'; // Ajusta la ruta según tu estructura
+import { Venta } from '../../ventas/entities/venta.entity';
 
 @Entity('usuarios')
 export class Usuario {
   @PrimaryGeneratedColumn('identity')
   id: number;
 
-  @Column('varchar', { length: 15 })
+  @Column({ type: 'varchar', length: 15 })
   usuario: string;
 
-  @Column('varchar', { length: 250 })
+  @Column({ type: 'varchar', length: 250 })
   clave: string;
 
-  @Column('varchar', { length: 50 })
+  @Column({ type: 'varchar', length: 50, unique: true })
   email: string;
 
-  @Column('varchar', { length: 15 })
+  @Column({ type: 'varchar', length: 15 })
   rol: string;
 
-  @Column('boolean')
+  @Column({ type: 'boolean', default: false })
   premium: boolean;
 
   @CreateDateColumn({ name: 'fecha_creacion' })

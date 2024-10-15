@@ -3,11 +3,11 @@ import {
   CreateDateColumn,
   DeleteDateColumn,
   Entity,
-  OneToMany, // Asegúrate de importar OneToMany
+  OneToMany,
   PrimaryGeneratedColumn,
   UpdateDateColumn,
 } from 'typeorm';
-import { Venta } from '../../ventas/entities/venta.entity'; // Ajusta la ruta según tu estructura
+import { Venta } from '../../ventas/entities/venta.entity';
 
 @Entity('clientes')
 export class Cliente {
@@ -38,7 +38,6 @@ export class Cliente {
   @DeleteDateColumn({ name: 'fecha_eliminacion', select: false })
   fechaEliminacion: Date;
 
-  // Relación con la entidad Venta
   @OneToMany(() => Venta, venta => venta.cliente)
   ventas: Venta[];
 }

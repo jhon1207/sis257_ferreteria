@@ -13,11 +13,11 @@ export class ProductosService {
   async create(createProductoDto: CreateProductoDto): Promise<Producto> {
     const existe = await this.productosRepository.findOne({
       where: {
-        nombreProducto: createProductoDto.nombreProducto.trim(), // Asegúrate de que el nombre de la propiedad sea correcto
-        descripcion: createProductoDto.descripcion.trim(), // El nombre de la propiedad también debe ser correcto
-        categoria: { id_categoria: createProductoDto.idCategoria }, // Asegúrate de que la propiedad sea correcta
+        nombreProducto: createProductoDto.nombreProducto.trim(),
+        descripcion: createProductoDto.descripcion.trim(),
+        categoria: { id_categoria: createProductoDto.idCategoria },
       },
-      relations: ['categoria'], // Esto asegura que se carguen las relaciones si es necesario
+      relations: ['categoria'],
     });
 
     if (existe) {
@@ -29,7 +29,7 @@ export class ProductosService {
       descripcion: createProductoDto.descripcion.trim(),
       precio: createProductoDto.precio,
       stock: createProductoDto.stock,
-      categoria: { id_categoria: createProductoDto.idCategoria }, // Asegúrate de que la propiedad sea correcta
+      categoria: { id_categoria: createProductoDto.idCategoria },
     });
 
     return this.productosRepository.save(productoNuevo);
@@ -49,7 +49,7 @@ export class ProductosService {
 
   async findOne(id: string): Promise<Producto> {
     const producto = await this.productosRepository.findOne({
-      where: { id_producto: id }, // Asegúrate de que el nombre de la propiedad sea correcto
+      where: { id_producto: id },
       relations: ['categoria'],
     });
     if (!producto) {
@@ -61,12 +61,12 @@ export class ProductosService {
   async update(id: string, updateProductoDto: UpdateProductoDto): Promise<Producto> {
     const producto = await this.findOne(id);
     const productoUpdate = Object.assign(producto, updateProductoDto);
-    productoUpdate.categoria = { id_categoria: updateProductoDto.idCategoria } as Categoria; // Asegúrate de que la propiedad sea correcta
+    productoUpdate.categoria = { id_categoria: updateProductoDto.idCategoria } as Categoria;
     return this.productosRepository.save(productoUpdate);
   }
 
   async remove(id: string) {
     const producto = await this.findOne(id);
-    return this.productosRepository.delete(producto.id_producto); // Asegúrate de que el nombre de la propiedad sea correcto
+    return this.productosRepository.delete(producto.id_producto);
   }
 }

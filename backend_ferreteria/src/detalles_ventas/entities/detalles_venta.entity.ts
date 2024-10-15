@@ -1,6 +1,6 @@
 import { Entity, PrimaryGeneratedColumn, ManyToOne, Column } from 'typeorm';
-import { Venta } from '../../ventas/entities/venta.entity'; // Ensure this path is correct
-import { Producto } from '../../productos/entities/producto.entity'; // Ensure this path is correct
+import { Venta } from '../../ventas/entities/venta.entity';
+import { Producto } from '../../productos/entities/producto.entity';
 
 @Entity('detalles_ventas')
 export class DetalleVenta {
@@ -11,7 +11,7 @@ export class DetalleVenta {
   venta: Venta;
 
   @ManyToOne(() => Producto)
-  producto: Producto; // Ensure this entity is defined correctly
+  producto: Producto;
 
   @Column('int', { nullable: false })
   cantidad: number;
@@ -20,5 +20,5 @@ export class DetalleVenta {
   precio_unitario: number;
 
   @Column('decimal', { precision: 10, scale: 2, nullable: false })
-  subtotal: number; // Ensure this is calculated or stored correctly
+  subtotal: number;
 }

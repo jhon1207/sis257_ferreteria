@@ -12,21 +12,18 @@ export class VentasService {
     private readonly ventasRepository: Repository<Venta>,
   ) {}
 
-  // Crear nueva venta
   async create(createVentaDto: CreateVentaDto): Promise<Venta> {
     const nuevaVenta = this.ventasRepository.create(createVentaDto);
     return this.ventasRepository.save(nuevaVenta);
   }
 
-  // Obtener todas las ventas
   findAll(): Promise<Venta[]> {
     return this.ventasRepository.find({ relations: ['cliente', 'usuario'] });
   }
 
-  // Obtener una venta por ID
   async findOne(id_venta: string): Promise<Venta> {
     const venta = await this.ventasRepository.findOne({
-      where: { id_venta }, // Asegúrate de usar el campo 'id' si es la clave primaria
+      where: { id_venta },
 
       relations: ['cliente', 'usuario'],
     });
@@ -36,7 +33,6 @@ export class VentasService {
     return venta;
   }
 
-  // Actualizar una venta por ID
   async update(id: string, updateVentaDto: UpdateVentaDto): Promise<Venta> {
     const venta = await this.findOne(id);
     if (!venta) {
@@ -46,7 +42,6 @@ export class VentasService {
     return this.findOne(id);
   }
 
-  // Eliminar una venta por ID
   async remove(id: string): Promise<void> {
     const resultado = await this.ventasRepository.delete(id);
     if (!resultado.affected) {

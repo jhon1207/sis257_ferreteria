@@ -6,7 +6,14 @@ import { DocumentBuilder, SwaggerModule } from '@nestjs/swagger';
 async function bootstrap() {
   const app = await NestFactory.create(AppModule);
 
-  app.useGlobalPipes(new ValidationPipe());
+  app.useGlobalPipes(
+    new ValidationPipe({
+      transform: true,
+      whitelist: true,
+      forbidNonWhitelisted: true,
+    }),
+  );
+
   app.setGlobalPrefix('api');
   app.enableVersioning({ type: VersioningType.URI, defaultVersion: '1' });
   app.enableCors();
@@ -17,10 +24,11 @@ async function bootstrap() {
     .setVersion('1.0')
     .addTag('clientes')
     .build();
+
   const document = SwaggerModule.createDocument(app, config);
   SwaggerModule.setup('apidoc', app, document);
 
   await app.listen(process.env.PORT);
-  console.log(`App corriendon ${await app.getUrl()}/apidoc`);
+  console.log(`App corriendo en ${await app.getUrl()}/apidoc`);
 }
 bootstrap();

@@ -20,8 +20,8 @@ export class Producto {
   stock: number;
 
   @ManyToOne(() => Categoria, categoria => categoria.productos, { nullable: false })
-  categoria: Categoria; // Cambiado de Categoria[] a Categoria
+  categoria: Categoria;
 
-  @OneToMany(() => DetalleVenta, detalleVenta => detalleVenta.producto) // Relación inversa
-  detalleVentas: DetalleVenta[]; // Esta propiedad almacenará los detalles de venta
+  @OneToMany(() => DetalleVenta, detalleVenta => detalleVenta.producto)
+  detalleVentas: DetalleVenta[];
 }

@@ -21,16 +21,16 @@ export class VentasController {
 
   @Get(':id')
   findOne(@Param('id') id: string) {
-    return this.ventasService.findOne(id); // No need to convert 'id' to number
+    return this.ventasService.findOne(id);
   }
 
   @Patch(':id')
   update(@Param('id') id: string, @Body() updateVentaDto: UpdateVentaDto) {
-    return this.ventasService.update(id, updateVentaDto); // No need to convert 'id' to number
+    return this.ventasService.update(id, updateVentaDto);
   }
 
   @Delete(':id')
   remove(@Param('id') id: string) {
-    return this.ventasService.remove(id); // No need to convert 'id' to number
+    return this.ventasService.remove(id);
   }
 }
