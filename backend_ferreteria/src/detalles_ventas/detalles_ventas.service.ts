@@ -4,7 +4,8 @@ import { UpdateDetallesVentaDto } from './dto/update-detalles_venta.dto';
 
 @Injectable()
 export class DetallesVentasService {
-  create(createDetallesVentaDto: CreateDetallesVentaDto) {
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  create(_createDetallesVentaDto: CreateDetallesVentaDto) {
     return 'This action adds a new detallesVenta';
   }
 
@@ -16,6 +17,7 @@ export class DetallesVentasService {
     return `This action returns a #${id} detallesVenta`;
   }
 
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   update(id: number, updateDetallesVentaDto: UpdateDetallesVentaDto) {
     return `This action updates a #${id} detallesVenta`;
   }

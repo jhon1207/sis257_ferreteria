@@ -1,46 +1,27 @@
-import { Categoria } from 'src/categorias/entities/categoria.entity';
-import {
-  Column,
-  CreateDateColumn,
-  DeleteDateColumn,
-  Entity,
-  JoinColumn,
-  ManyToOne,
-  OneToMany,
-  PrimaryGeneratedColumn,
-  UpdateDateColumn,
-} from 'typeorm';
+import { Column, Entity, ManyToOne, OneToMany, PrimaryGeneratedColumn } from 'typeorm';
+import { Categoria } from '../../categorias/entities/categoria.entity';
+import { DetalleVenta } from 'src/detalles_ventas/entities/detalles_venta.entity';
 
 @Entity('productos')
 export class Producto {
-  @PrimaryGeneratedColumn()
-  id: number;
+  @PrimaryGeneratedColumn('uuid')
+  id_producto: string;
 
-  @Column('varchar', { length: 100, nullable: false })
+  @Column({ name: 'nombre_producto', type: 'varchar', length: 255 })
   nombreProducto: string;
 
-  @Column('varchar', { length: 100, nullable: true })
+  @Column({ name: 'descripcion', type: 'text', nullable: true })
   descripcion: string;
 
-  @Column('decimal', { precision: 10, scale: 2 })
+  @Column({ name: 'precio', type: 'decimal', precision: 10, scale: 2 })
   precio: number;
 
-  @Column('int', { default: 0 })
+  @Column({ name: 'stock', type: 'int' })
   stock: number;
 
-  @CreateDateColumn({ name: 'fecha_creacion' })
-  fechaCreacion: Date;
+  @ManyToOne(() => Categoria, categoria => categoria.productos, { nullable: false })
+  categoria: Categoria; // Cambiado de Categoria[] a Categoria
 
-  @UpdateDateColumn({ name: 'fecha_modificacion' })
-  fechaModificacion: Date;
-
-  @DeleteDateColumn({ name: 'fecha_eliminacion', select: false })
-  fechaEliminacion: Date;
-
-  @ManyToOne(() => Categoria, categoria => categoria.productos)
-  @JoinColumn({ name: 'id_categoria', referencedColumnName: 'id' })
-  categoria: Categoria;
-
+  @OneToMany(() => DetalleVenta, detalleVenta => detalleVenta.producto) // Relación inversa
+  detalleVentas: DetalleVenta[]; // Esta propiedad almacenará los detalles de venta
 }
-
-

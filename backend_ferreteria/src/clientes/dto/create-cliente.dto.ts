@@ -35,4 +35,3 @@ export class CreateClienteDto {
   @MinLength(2, { message: 'El campo direccion no debe ser menor a 2 caracteres' })
   readonly direccion: string;
 }
-

@@ -14,4 +14,3 @@ export class CreateCategoriaDto {
   @IsNumber({}, { message: 'El campo idCategoria debe ser de tipo numérico' })
   readonly idCategoria: number;
 }
-

@@ -28,7 +28,7 @@ export class CategoriasService {
   }
 
   async findOne(id: number): Promise<Categoria> {
-    const categoria = await this.categoriasRepository.findOneBy({ id });
+    const categoria = await this.categoriasRepository.findOneBy({ id_categoria: id });
     if (!categoria) {
       throw new NotFoundException(`La categoria ${id} no existe`);
     }
@@ -43,6 +43,6 @@ export class CategoriasService {
 
   async remove(id: number) {
     const categoria = await this.findOne(id);
-    return this.categoriasRepository.delete(categoria.id);
+    return this.categoriasRepository.delete(categoria.id_categoria);
   }
 }

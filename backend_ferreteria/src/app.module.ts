@@ -20,18 +20,20 @@ import { CategoriasModule } from './categorias/categorias.module';
       username: process.env.DB_USERNAME,
       password: process.env.DB_PASSWORD,
       database: process.env.DB_NAME,
-      entities: [__dirname + '*/**/entities/*.{ts|js}'],
+      entities: [__dirname + '/**/*.entity.{ts,js}'],
       synchronize: true,
       autoLoadEntities: true,
+      logging: ['query', 'error'], // Enable logging for debugging
     }),
 
-    ProductosModule, 
-    ClientesModule, 
-    UsuariosModule, 
-    VentasModule, 
-    DetallesVentasModule, CategoriasModule],
+    ProductosModule,
+    ClientesModule,
+    UsuariosModule,
+    VentasModule,
+    DetallesVentasModule,
+    CategoriasModule,
+  ],
   controllers: [AppController],
   providers: [AppService],
 })
-export class AppModule { }
-
+export class AppModule {}
