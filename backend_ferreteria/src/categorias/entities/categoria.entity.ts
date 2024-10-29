@@ -12,7 +12,7 @@ import {
 @Entity('categorias')
 export class Categoria {
   @PrimaryGeneratedColumn()
-  id_categoria: number;
+  id: number;
 
   @Column('varchar', { length: 100, nullable: true })
   descripcion: string;

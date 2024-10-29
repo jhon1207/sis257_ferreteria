@@ -9,8 +9,8 @@ export class CreateCategoriaDto {
   @MinLength(5, { message: 'El campo descripcion no debe ser menor a 5 caracteres' })
   readonly descripcion: string;
 
-  @ApiProperty()
-  @IsDefined({ message: 'El campo idCategoria debe estar definido' })
-  @IsNumber({}, { message: 'El campo idCategoria debe ser de tipo numérico' })
-  readonly idCategoria: number;
+  //@ApiProperty()
+  //@IsDefined({ message: 'El campo idCategoria debe estar definido' })
+  //@IsNumber({}, { message: 'El campo idCategoria debe ser de tipo numérico' })
+  //readonly idCategoria: number;
 }

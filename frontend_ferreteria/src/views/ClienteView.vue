@@ -29,7 +29,7 @@ function handleGuardar() {
 
 <template>
     <div>
-        <h1>Intépretes</h1>
+        <h1>Clientes</h1>
         <Button label="Crear Nuevo" icon="pi pi-plus" @click="hableCreate" />
         <ClienteList ref="clienteListRef" @edit="handleEdit" />
         <ClienteSave :mostrar="mostrarDialog" :cliente="clienteEdit" :modoEdicion="!!clienteEdit"

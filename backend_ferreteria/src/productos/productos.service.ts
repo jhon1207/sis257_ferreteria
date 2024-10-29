@@ -15,7 +15,7 @@ export class ProductosService {
       where: {
         nombreProducto: createProductoDto.nombreProducto.trim(),
         descripcion: createProductoDto.descripcion.trim(),
-        categoria: { id_categoria: createProductoDto.idCategoria },
+        categoria: { id: createProductoDto.idCategoria },
       },
       relations: ['categoria'],
     });
@@ -29,7 +29,7 @@ export class ProductosService {
       descripcion: createProductoDto.descripcion.trim(),
       precio: createProductoDto.precio,
       stock: createProductoDto.stock,
-      categoria: { id_categoria: createProductoDto.idCategoria },
+      categoria: { id: createProductoDto.idCategoria },
     });
 
     return this.productosRepository.save(productoNuevo);
@@ -61,7 +61,7 @@ export class ProductosService {
   async update(id: string, updateProductoDto: UpdateProductoDto): Promise<Producto> {
     const producto = await this.findOne(id);
     const productoUpdate = Object.assign(producto, updateProductoDto);
-    productoUpdate.categoria = { id_categoria: updateProductoDto.idCategoria } as Categoria;
+    productoUpdate.categoria = { id: updateProductoDto.idCategoria } as Categoria;
     return this.productosRepository.save(productoUpdate);
   }
 
