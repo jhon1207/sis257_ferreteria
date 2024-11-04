@@ -9,32 +9,37 @@ const categoriaListRef = ref<typeof CategoriaList | null>(null)
 const categoriaEdit = ref<any>(null)
 
 function hableCreate() {
-    categoriaEdit.value = null
-    mostrarDialog.value = true
+  categoriaEdit.value = null
+  mostrarDialog.value = true
 }
 
 function handleEdit(categoria: any) {
-    categoriaEdit.value = categoria
-    mostrarDialog.value = true
+  categoriaEdit.value = categoria
+  mostrarDialog.value = true
 }
 
 function handleCloseDialog() {
-    mostrarDialog.value = false
+  mostrarDialog.value = false
 }
 
 function handleGuardar() {
-    categoriaListRef.value?.obtenerLista()
+  categoriaListRef.value?.obtenerLista()
 }
 </script>
 
 <template>
-    <div>
-        <h1>Categorias</h1>
-        <Button label="Crear Nuevo" icon="pi pi-plus" @click="hableCreate" />
-        <CategoriaList ref="categoriaListRef" @edit="handleEdit" />
-        <CategoriaSave :mostrar="mostrarDialog" :categoria="categoriaEdit" :modoEdicion="!!categoriaEdit"
-            @guardar="handleGuardar" @close="handleCloseDialog" />
-    </div>
+  <div>
+    <h1>Categorias</h1>
+    <Button label="Crear Nuevo" icon="pi pi-plus" @click="hableCreate" />
+    <CategoriaList ref="categoriaListRef" @edit="handleEdit" />
+    <CategoriaSave
+      :mostrar="mostrarDialog"
+      :categoria="categoriaEdit"
+      :modoEdicion="!!categoriaEdit"
+      @guardar="handleGuardar"
+      @close="handleCloseDialog"
+    />
+  </div>
 </template>
 
 <style scoped></style>

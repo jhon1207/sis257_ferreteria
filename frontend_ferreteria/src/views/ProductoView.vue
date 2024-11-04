@@ -9,32 +9,37 @@ const productoListRef = ref<typeof ProductoList | null>(null)
 const productoEdit = ref<any>(null)
 
 function hableCreate() {
-    productoEdit.value = null
-    mostrarDialog.value = true
+  productoEdit.value = null
+  mostrarDialog.value = true
 }
 
 function handleEdit(producto: any) {
-    productoEdit.value = producto
-    mostrarDialog.value = true
+  productoEdit.value = producto
+  mostrarDialog.value = true
 }
 
 function handleCloseDialog() {
-    mostrarDialog.value = false
+  mostrarDialog.value = false
 }
 
 function handleGuardar() {
-    productoListRef.value?.obtenerLista()
+  productoListRef.value?.obtenerLista()
 }
 </script>
 
 <template>
-    <div>
-        <h1>Productos</h1>
-        <Button label="Crear Nuevo" icon="pi pi-plus" @click="hableCreate" />
-        <ProductoList ref="productoListRef" @edit="handleEdit" />
-        <ProductoSave :mostrar="mostrarDialog" :producto="productoEdit" :modoEdicion="!!productoEdit"
-            @guardar="handleGuardar" @close="handleCloseDialog" />
-    </div>
+  <div>
+    <h1>Productos</h1>
+    <Button label="Crear Nuevo" icon="pi pi-plus" @click="hableCreate" />
+    <ProductoList ref="productoListRef" @edit="handleEdit" />
+    <ProductoSave
+      :mostrar="mostrarDialog"
+      :producto="productoEdit"
+      :modoEdicion="!!productoEdit"
+      @guardar="handleGuardar"
+      @close="handleCloseDialog"
+    />
+  </div>
 </template>
 
 <style scoped></style>

@@ -5,7 +5,13 @@ import HelloWorld from './components/HelloWorld.vue'
 
 <template>
   <header>
-    <img alt="Vue logo" class="logo" src="@/assets/logo.svg" width="125" height="125" />
+    <img
+      alt="Vue logo"
+      class="logo"
+      src="@/assets/logo.svg"
+      width="125"
+      height="125"
+    />
 
     <div class="wrapper">
       <HelloWorld msg="Laboratorio SIS257!" />
@@ -16,6 +22,8 @@ import HelloWorld from './components/HelloWorld.vue'
         <RouterLink to="/clientes">Clientes</RouterLink>
         <RouterLink to="/categorias">Categoria</RouterLink>
         <RouterLink to="/productos">Productos</RouterLink>
+        <RouterLink to="/ventas">Ventas</RouterLink>
+        <RouterLink to="/detalle-ventas">Detalle Ventas</RouterLink>
       </nav>
     </div>
   </header>

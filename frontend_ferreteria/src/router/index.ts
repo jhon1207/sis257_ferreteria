@@ -12,24 +12,31 @@ const router = createRouter({
     {
       path: '/clientes',
       name: 'clientes',
-      component: () => import('../views/ClienteView.vue')
+      component: () => import('../views/ClienteView.vue'),
     },
     {
       path: '/categorias',
       name: 'categorias',
-      component: () => import('../views/CategoriaView.vue')
+      component: () => import('../views/CategoriaView.vue'),
     },
     {
       path: '/productos',
       name: 'productos',
-      component: () => import('../views/ProductoView.vue')
+      component: () => import('../views/ProductoView.vue'),
+    },
+    {
+      path: '/ventas',
+      name: 'ventas',
+      component: () => import('../views/VentaView.vue'),
+    },
+    {
+      path: '/detalle-ventas', // Ensure this matches exactly with the RouterLink
+      name: 'detalle-ventas',
+      component: () => import('../views/DetalleVentaView.vue'),
     },
     {
       path: '/about',
       name: 'about',
-      // route level code-splitting
-      // this generates a separate chunk (About.[hash].js) for this route
-      // which is lazy-loaded when the route is visited.
       component: () => import('../views/AboutView.vue'),
     },
   ],

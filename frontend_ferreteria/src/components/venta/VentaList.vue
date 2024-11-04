@@ -1,67 +1,75 @@
 <script setup lang="ts">
-import type { Categoria } from '@/models/categoria'
+import type { Venta } from '@/models/venta'
 import http from '@/plugins/axios'
 import Button from 'primevue/button'
 import Dialog from 'primevue/dialog'
 import { onMounted, ref } from 'vue'
 
-const ENDPOINT = 'categorias'
-let categorias = ref<Categoria[]>([])
+const ENDPOINT = 'ventas'
+const ventas = ref<Venta[]>([])
 const emit = defineEmits(['edit'])
-const categoriaDelete = ref<Categoria | null>(null)
+const ventaDelete = ref<Venta | null>(null)
 const mostrarConfirmDialog = ref<boolean>(false)
 
 async function obtenerLista() {
-  categorias.value = await http.get(ENDPOINT).then(response => response.data)
+  ventas.value = await http.get(ENDPOINT).then(response => response.data)
 }
 
-function emitirEdicion(categoria: Categoria) {
-  emit('edit', categoria)
+function emitirEdicion(venta: Venta) {
+  emit('edit', venta)
 }
 
-function mostrarEliminarConfirm(categoria: Categoria) {
-  categoriaDelete.value = categoria
+function mostrarEliminarConfirm(venta: Venta) {
+  ventaDelete.value = venta
   mostrarConfirmDialog.value = true
 }
 
 async function eliminar() {
-  await http.delete(`${ENDPOINT}/${categoriaDelete.value?.id}`)
-  obtenerLista()
+  await http.delete(`${ENDPOINT}/${ventaDelete.value?.id_venta}`)
+  await obtenerLista()
   mostrarConfirmDialog.value = false
 }
 
 onMounted(() => {
   obtenerLista()
 })
+
 defineExpose({ obtenerLista })
 </script>
-
 <template>
   <div>
+    <h2>Gestión de Ventas</h2>
     <table>
       <thead>
         <tr>
           <th>Nro.</th>
-          <th>Descripcion</th>
+          <th>Fecha</th>
+          <th>ID Cliente</th>
+          <th>ID Usuario</th>
+          <th>Total</th>
           <th>Acciones</th>
         </tr>
       </thead>
       <tbody>
-        <tr v-for="(categoria, index) in categorias" :key="categoria.id">
+        <tr v-for="(venta, index) in ventas" :key="venta.id_venta">
           <td>{{ index + 1 }}</td>
-          <td>{{ categoria.descripcion }}</td>
+          <td>{{ venta.fecha }}</td>
+          <td>{{ venta.id_cliente }}</td>
+          <td>{{ venta.id_usuario }}</td>
+          <td>{{ venta.total.toFixed(2) }}</td>
+          <!-- Format total to 2 decimal places -->
           <td>
             <Button
               icon="pi pi-pencil"
               aria-label="Editar"
               text
-              @click="emitirEdicion(categoria)"
+              @click="emitirEdicion(venta)"
             />
             <Button
               icon="pi pi-trash"
               aria-label="Eliminar"
               text
-              @click="mostrarEliminarConfirm(categoria)"
+              @click="mostrarEliminarConfirm(venta)"
             />
           </td>
         </tr>

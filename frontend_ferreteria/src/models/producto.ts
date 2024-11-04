@@ -1,10 +1,10 @@
-import type { Categoria } from "./categoria"
+import type { Categoria } from './categoria'
 
 export interface Producto {
-    id: number
-    nombreProducto: string
-    descripcion: string
-    precio: number
-    stock: number
-    categoria: Categoria
+  id: number
+  nombreProducto: string
+  descripcion: string
+  precio: number
+  stock: number
+  categoria: Categoria
 }

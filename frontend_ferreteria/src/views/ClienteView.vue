@@ -9,32 +9,37 @@ const clienteListRef = ref<typeof ClienteList | null>(null)
 const clienteEdit = ref<any>(null)
 
 function hableCreate() {
-    clienteEdit.value = null
-    mostrarDialog.value = true
+  clienteEdit.value = null
+  mostrarDialog.value = true
 }
 
 function handleEdit(cliente: any) {
-    clienteEdit.value = cliente
-    mostrarDialog.value = true
+  clienteEdit.value = cliente
+  mostrarDialog.value = true
 }
 
 function handleCloseDialog() {
-    mostrarDialog.value = false
+  mostrarDialog.value = false
 }
 
 function handleGuardar() {
-    clienteListRef.value?.obtenerLista()
+  clienteListRef.value?.obtenerLista()
 }
 </script>
 
 <template>
-    <div>
-        <h1>Clientes</h1>
-        <Button label="Crear Nuevo" icon="pi pi-plus" @click="hableCreate" />
-        <ClienteList ref="clienteListRef" @edit="handleEdit" />
-        <ClienteSave :mostrar="mostrarDialog" :cliente="clienteEdit" :modoEdicion="!!clienteEdit"
-            @guardar="handleGuardar" @close="handleCloseDialog" />
-    </div>
+  <div>
+    <h1>Clientes</h1>
+    <Button label="Crear Nuevo" icon="pi pi-plus" @click="hableCreate" />
+    <ClienteList ref="clienteListRef" @edit="handleEdit" />
+    <ClienteSave
+      :mostrar="mostrarDialog"
+      :cliente="clienteEdit"
+      :modoEdicion="!!clienteEdit"
+      @guardar="handleGuardar"
+      @close="handleCloseDialog"
+    />
+  </div>
 </template>
 
 <style scoped></style>
