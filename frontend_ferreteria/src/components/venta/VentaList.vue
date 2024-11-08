@@ -57,7 +57,6 @@ defineExpose({ obtenerLista })
           <td>{{ venta.id_cliente }}</td>
           <td>{{ venta.id_usuario }}</td>
           <td>{{ venta.total.toFixed(2) }}</td>
-          <!-- Format total to 2 decimal places -->
           <td>
             <Button
               icon="pi pi-pencil"

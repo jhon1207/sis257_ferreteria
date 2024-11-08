@@ -6,7 +6,7 @@ import Dialog from 'primevue/dialog'
 import { onMounted, ref, watch } from 'vue'
 
 const ENDPOINT = 'detalle_venta'
-const detalleVenta = ref<DetalleVenta[]>([]) // Use this variable consistently
+const detalleVenta = ref<DetalleVenta[]>([])
 const emit = defineEmits(['edit'])
 const detalleDelete = ref<DetalleVenta | null>(null)
 const mostrarConfirmDialog = ref<boolean>(false)
@@ -14,7 +14,7 @@ const ventaId = ref<number | null>(null)
 
 async function obtenerLista() {
   if (ventaId.value) {
-    detalleVenta.value = await http // Use 'detalleVenta' here
+    detalleVenta.value = await http
       .get(`${ENDPOINT}?id_venta=${ventaId.value}`)
       .then(response => response.data)
   }

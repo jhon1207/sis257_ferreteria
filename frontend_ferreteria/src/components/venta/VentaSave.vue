@@ -1,34 +1,34 @@
 <script setup lang="ts">
-import type { Venta } from '@/models/venta' // Import the Venta interface
-import http from '@/plugins/axios' // Import the Axios instance
-import Button from 'primevue/button' // Import the Button component from PrimeVue
-import Dialog from 'primevue/dialog' // Import the Dialog component from PrimeVue
-import InputText from 'primevue/inputtext' // Import the InputText component from PrimeVue
-import { computed, ref, watch } from 'vue' // Import Vue Composition API functions
+import type { Venta } from '@/models/venta'
+import http from '@/plugins/axios'
+import Button from 'primevue/button'
+import Dialog from 'primevue/dialog'
+import InputText from 'primevue/inputtext'
+import { computed, ref, watch } from 'vue'
 
-const ENDPOINT = 'ventas' // API endpoint for ventas
+const ENDPOINT = 'ventas'
 const props = defineProps({
-  mostrar: Boolean, // Prop to control the visibility of the dialog
+  mostrar: Boolean,
   venta: {
     type: Object as () => Venta,
-    default: () => ({}) as Venta, // Default value for venta
+    default: () => ({}) as Venta,
   },
-  modoEdicion: Boolean, // Prop to determine if the dialog is for editing
+  modoEdicion: Boolean,
 })
-const emit = defineEmits(['guardar', 'close']) // Emit events for saving and closing
+const emit = defineEmits(['guardar', 'close'])
 
 const dialogVisible = computed({
-  get: () => props.mostrar, // Get visibility from props
+  get: () => props.mostrar,
   set: value => {
-    if (!value) emit('close') // Emit close event if dialog is hidden
+    if (!value) emit('close')
   },
 })
 
-const venta = ref<Venta>({ ...props.venta }) // Create a reactive variable for venta
+const venta = ref<Venta>({ ...props.venta })
 watch(
   () => props.venta,
   newVal => {
-    venta.value = { ...newVal } // Update venta when props change
+    venta.value = { ...newVal }
   },
 )
 
@@ -41,15 +41,15 @@ async function handleSave() {
       total: venta.value.total,
     }
     if (props.modoEdicion) {
-      await http.patch(`${ENDPOINT}/${venta.value.id_venta}`, body) // Update existing venta
+      await http.patch(`${ENDPOINT}/${venta.value.id_venta}`, body)
     } else {
-      await http.post(ENDPOINT, body) // Create new venta
+      await http.post(ENDPOINT, body)
     }
-    emit('guardar') // Emit save event
-    venta.value = {} as Venta // Reset venta
-    dialogVisible.value = false // Close the dialog
+    emit('guardar')
+    venta.value = {} as Venta
+    dialogVisible.value = false
   } catch (error: any) {
-    alert(error?.response?.data?.message) // Display error message
+    alert(error?.response?.data?.message)
   }
 }
 </script>
