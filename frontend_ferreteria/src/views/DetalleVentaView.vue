@@ -43,8 +43,8 @@ function handleDelete(venta: Venta) {
 
 <template>
   <div>
-    <h1>Gestión de Ventas</h1>
-    <Button label="Crear Nueva Venta" icon="pi pi-plus" @click="handleCreate" />
+    <h1>Detalle de Ventas</h1>
+    <Button label="Crear Nuevo Detalle de  Venta" icon="pi pi-plus" @click="handleCreate" />
     <DetalleVentaList
       ref="ventaListRef"
       @edit="handleEdit"

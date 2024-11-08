@@ -29,7 +29,7 @@ function handleGuardar() {
 
 <template>
   <div>
-    <h1>Gestión de Ventas</h1>
+    <h1>Ventas</h1>
     <Button label="Crear Nueva Venta" icon="pi pi-plus" @click="handleCreate" />
     <VentaList ref="ventaListRef" @edit="handleEdit" />
     <VentaSave
