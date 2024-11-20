@@ -6,29 +6,35 @@ import {
   OneToMany,
   PrimaryGeneratedColumn,
   UpdateDateColumn,
+  BeforeInsert,
+  BeforeUpdate,
 } from 'typeorm';
 import { Venta } from '../../ventas/entities/venta.entity';
+import * as bcrypt from 'bcrypt';
 
 @Entity('usuarios')
 export class Usuario {
+  // Primary Key
   @PrimaryGeneratedColumn('identity')
   id: number;
 
-  @Column({ type: 'varchar', length: 15 })
+  // Campos principales
+  @Column('varchar', { length: 15 })
   usuario: string;
 
-  @Column({ type: 'varchar', length: 250 })
+  @Column('varchar', { length: 250, select: false })
   clave: string;
 
-  @Column({ type: 'varchar', length: 50, unique: true })
+  @Column('varchar', { length: 50 })
   email: string;
 
-  @Column({ type: 'varchar', length: 15 })
+  @Column('varchar', { length: 15 })
   rol: string;
 
-  @Column({ type: 'boolean', default: false })
+  @Column('boolean')
   premium: boolean;
 
+  // Timestamps
   @CreateDateColumn({ name: 'fecha_creacion' })
   fechaCreacion: Date;
 
@@ -38,6 +44,19 @@ export class Usuario {
   @DeleteDateColumn({ name: 'fecha_eliminacion', select: false })
   fechaEliminacion: Date;
 
+  // Relaciones
   @OneToMany(() => Venta, venta => venta.usuario)
   ventas: Venta[];
+
+  // Métodos
+  @BeforeInsert()
+  @BeforeUpdate()
+  async hashPassword() {
+    const salt = await bcrypt.genSalt();
+    this.clave = await bcrypt.hash(this.clave, salt);
+  }
+
+  async validatePassword(plainPassword: string): Promise<boolean> {
+    return bcrypt.compare(plainPassword, this.clave);
+  }
 }

@@ -1,6 +1,8 @@
 <script setup lang="ts">
 import { RouterLink, RouterView } from 'vue-router'
 import HelloWorld from './components/HelloWorld.vue'
+import { useAuthStore } from '@/stores/index'
+const authStore = useAuthStore()
 </script>
 
 <template>
@@ -12,7 +14,22 @@ import HelloWorld from './components/HelloWorld.vue'
       width="125"
       height="125"
     />
+    <div class="wrapper">
+      <HelloWorld
+        :msg="'SIS257' + (authStore.user ? ' - Hola ' + authStore.user : '')"
+      />
 
+      <nav>
+        <RouterLink to="/">Inicio</RouterLink>
+        <RouterLink v-if="!authStore.token" to="/login"
+          >Iniciar Sesión</RouterLink
+        >
+        <span v-else>
+          <RouterLink to="/about">Acerca De</RouterLink>
+          <a @click="authStore.logout()" class="text-danger">Salir</a>
+        </span>
+      </nav>
+    </div>
     <div class="wrapper">
       <HelloWorld msg="Laboratorio SIS257!" />
 

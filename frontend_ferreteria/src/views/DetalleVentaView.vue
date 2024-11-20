@@ -3,18 +3,18 @@ import DetalleVentaList from '@/components/detalleventa/DetalleVentaList.vue'
 import DetalleVentaSave from '@/components/detalleventa/DetalleVentaSave.vue'
 import Button from 'primevue/button'
 import { ref } from 'vue'
-import type { Venta } from '@/models/venta'
+
 const mostrarDialog = ref<boolean>(false)
-const ventaListRef = ref<typeof DetalleVentaList | null>(null)
-const ventaEdit = ref<Venta | null>(null)
+const detalleVentaListRef = ref<typeof DetalleVentaList | null>(null)
+const detalleVentaEdit = ref<any>(null)
 
 function handleCreate() {
-  ventaEdit.value = null
+  detalleVentaEdit.value = null
   mostrarDialog.value = true
 }
 
-function handleEdit(venta: Venta) {
-  ventaEdit.value = venta
+function handleEdit(detalleVenta: any) {
+  detalleVentaEdit.value = detalleVenta
   mostrarDialog.value = true
 }
 
@@ -23,37 +23,19 @@ function handleCloseDialog() {
 }
 
 function handleGuardar() {
-  ventaListRef.value?.obtenerLista()
-}
-
-function handleDelete(venta: Venta) {
-  if (confirm('¿Estás seguro de que deseas eliminar esta venta?')) {
-    http
-      .delete(`ventas/${venta.id_venta}`)
-      .then(() => {
-        ventaListRef.value?.obtenerLista()
-      })
-      .catch(err => {
-        console.error(err)
-        alert('Error al eliminar la venta. Inténtalo de nuevo.')
-      })
-  }
+  detalleVentaListRef.value?.obtenerLista()
 }
 </script>
 
 <template>
-  <div>
+  <div class="m-8">
     <h1>Detalle de Ventas</h1>
-    <Button label="Crear Nuevo Detalle de  Venta" icon="pi pi-plus" @click="handleCreate" />
-    <DetalleVentaList
-      ref="ventaListRef"
-      @edit="handleEdit"
-      @delete="handleDelete"
-    />
+    <Button label="Crear Nuevo" icon="pi pi-plus" @click="handleCreate" />
+    <DetalleVentaList ref="detalleVentaListRef" @edit="handleEdit" />
     <DetalleVentaSave
       :mostrar="mostrarDialog"
-      :venta="ventaEdit"
-      :modoEdicion="!!ventaEdit"
+      :detalleVenta="detalleVentaEdit"
+      :modoEdicion="!!detalleVentaEdit"
       @guardar="handleGuardar"
       @close="handleCloseDialog"
     />
