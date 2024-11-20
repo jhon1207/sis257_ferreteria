@@ -39,7 +39,7 @@ function onSubmit() {
   </div>
 </template>
 
-<style>
+<style scoped>
 .form {
   margin: 1.5rem auto;
   display: flex;

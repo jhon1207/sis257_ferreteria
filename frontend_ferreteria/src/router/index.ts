@@ -12,14 +12,9 @@ const router = createRouter({
       component: HomeView,
     },
     {
-      path: '/login',
-      name: 'login',
-      component: () => import('../views/LoginView.vue'),
-    },
-    {
-      path: '/clientes',
-      name: 'clientes',
-      component: () => import('../views/ClienteView.vue'),
+      path: '/about',
+      name: 'about',
+      component: () => import('../views/AboutView.vue'),
     },
     {
       path: '/categorias',
@@ -27,40 +22,32 @@ const router = createRouter({
       component: () => import('../views/CategoriaView.vue'),
     },
     {
+      path: '/clientes',
+      name: 'clientes',
+      component: () => import('../views/ClienteView.vue'),
+    },
+    {
       path: '/productos',
       name: 'productos',
       component: () => import('../views/ProductoView.vue'),
     },
     {
-      path: '/ventas',
-      name: 'ventas',
-      component: () => import('../views/VentaView.vue'),
-    },
-    {
-      path: '/detalle-ventas', // Asegúrate de que este path coincida exactamente con el RouterLink
-      name: 'detalle-ventas',
-      component: () => import('../views/DetalleVentaView.vue'),
-    },
-    {
-      path: '/about',
-      name: 'about',
-      component: () => import('../views/AboutView.vue'),
+      path: '/login',
+      name: 'login',
+      component: () => import('../views/LoginView.vue'),
     },
   ],
 })
 
 router.beforeEach(async to => {
-  const publicPages = ['/login']
+  const publicPages = ['/', '/login']
   const authRequired = !publicPages.includes(to.path)
-  const authStore = useAuthStore() // Asegúrate de que useAuthStore esté disponible
+  const authStore = useAuthStore()
 
-  // Verifica si la página requiere autenticación y si el token no está presente
   if (authRequired && !getTokenFromLocalStorage()) {
-    if (authStore) {
-      authStore.logout() // Deslogea al usuario
-    }
-    authStore.returnUrl = to.fullPath // Guarda la URL a la que intentarían acceder
-    return '/login' // Redirige al login
+    if (authStore) authStore.logout()
+    authStore.returnUrl = to.fullPath
+    return '/login'
   }
 })
 

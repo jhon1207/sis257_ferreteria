@@ -5,7 +5,7 @@ import http from '@/plugins/axios'
 import Button from 'primevue/button'
 import Dialog from 'primevue/dialog'
 import InputText from 'primevue/inputtext'
-import Dropdown from 'primevue/dropdown' 
+import Dropdown from 'primevue/dropdown'
 import { computed, ref, watch } from 'vue'
 
 const ENDPOINT = 'detalles_venta'
@@ -30,11 +30,9 @@ const dialogVisible = computed({
   },
 })
 
-
 async function obtenerProductos() {
   productos.value = await http.get('productos').then(response => response.data)
 }
-
 
 watch(
   () => props.detalleVenta,
