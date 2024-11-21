@@ -49,7 +49,11 @@ export class ProductosService {
 
   async findOne(id: number): Promise<Producto> {
     const producto = await this.productosRepository.findOne({
+<<<<<<< HEAD
       where: { id},
+=======
+      where: { id },
+>>>>>>> c99a4fd29b138cec348ee33b947b02e9c9dfbb00
       relations: ['categoria'],
     });
     if (!producto) {

@@ -25,7 +25,11 @@ export class VentasController {
   }
 
   @Patch(':id')
+<<<<<<< HEAD
   update(@Param('id') id: number, @Body() updateVentaDto: UpdateVentaDto) {
+=======
+  update(@Param('id') id: string, @Body() updateVentaDto: UpdateVentaDto) {
+>>>>>>> c99a4fd29b138cec348ee33b947b02e9c9dfbb00
     return this.ventasService.update(+id, updateVentaDto);
   }
 

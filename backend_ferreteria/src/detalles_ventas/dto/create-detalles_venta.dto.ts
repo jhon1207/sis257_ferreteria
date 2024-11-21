@@ -2,6 +2,18 @@ import { ApiProperty } from '@nestjs/swagger';
 import { IsDefined, IsNotEmpty, IsNumber, IsUUID } from 'class-validator';
 
 export class CreateDetallesVentaDto {
+<<<<<<< HEAD
+=======
+  @ApiProperty()
+  @IsUUID('4', { message: 'El ID de la venta debe ser un UUID válido' })
+  @IsNotEmpty({ message: 'El campo id_venta no debe ser vacío' })
+  readonly id: number;
+
+  @ApiProperty()
+  @IsUUID('4', { message: 'El ID del producto debe ser un UUID válido' })
+  @IsNotEmpty({ message: 'El campo id_producto no debe ser vacío' })
+  readonly id_producto: number;
+>>>>>>> c99a4fd29b138cec348ee33b947b02e9c9dfbb00
 
   @ApiProperty()
   @IsNotEmpty({ message: 'El campo cantidad no debe ser vacío' })
