@@ -3,7 +3,7 @@ import type { DetalleVenta } from '@/models/detalleventa'
 import http from '@/plugins/axios'
 import Button from 'primevue/button'
 import Dialog from 'primevue/dialog'
-import { onMounted, ref, watch } from 'vue'
+import { ref, watch } from 'vue'
 
 const ENDPOINT = 'detalle_venta'
 const detalleVenta = ref<DetalleVenta[]>([])

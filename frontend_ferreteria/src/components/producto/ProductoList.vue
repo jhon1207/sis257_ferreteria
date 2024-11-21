@@ -6,7 +6,7 @@ import Dialog from 'primevue/dialog'
 import { onMounted, ref } from 'vue'
 
 const ENDPOINT = 'productos'
-let producto = ref<Producto[]>([])
+const producto = ref<Producto[]>([])
 const emit = defineEmits(['edit'])
 const productoDelete = ref<Producto | null>(null)
 const mostrarConfirmDialog = ref<boolean>(false)

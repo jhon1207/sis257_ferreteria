@@ -1,145 +1,111 @@
 <script setup lang="ts"></script>
 
 <template>
-  <footer class="site-footer">
-    <div class="site-footer-top">
-      <div class="container">
-        <div class="row">
-          <div class="col-lg-6 col-12">
-            <h2 class="text-white mb-lg-0">Festava Live</h2>
+  <div>
+    <footer class="site-footer">
+      <div
+        class="container-fluid bg-dark text-light footer pt-5 mt-5 wow fadeIn"
+        data-wow-delay="0.1s"
+      >
+        <div>
+          <div class="container py-5">
+            <div class="row g-5">
+              <div class="col-lg-3 col-md-6">
+                <h4 class="text-light mb-4">Address</h4>
+                <p class="mb-2">
+                  <i class="fa fa-map-marker-alt me-3"></i>123 Street, New York,
+                  USA
+                </p>
+                <p class="mb-2">
+                  <i class="fa fa-phone-alt me-3"></i>+012 345 67890
+                </p>
+                <p class="mb-2">
+                  <i class="fa fa-envelope me-3"></i>info@example.com
+                </p>
+                <div class="d-flex pt-2">
+                  <a class="btn btn-outline-light btn-social" href=""
+                    ><i class="fab fa-twitter"></i
+                  ></a>
+                  <a class="btn btn-outline-light btn-social" href=""
+                    ><i class="fab fa-facebook-f"></i
+                  ></a>
+                  <a class="btn btn-outline-light btn-social" href=""
+                    ><i class="fab fa-youtube"></i
+                  ></a>
+                  <a class="btn btn-outline-light btn-social" href=""
+                    ><i class="fab fa-linkedin-in"></i
+                  ></a>
+                </div>
+              </div>
+              <div class="col-lg-3 col-md-6">
+                <h4 class="text-light mb-4">Opening Hours</h4>
+                <h6 class="text-light">Monday - Friday:</h6>
+                <p class="mb-4">09.00 AM - 09.00 PM</p>
+                <h6 class="text-light">Saturday - Sunday:</h6>
+                <p class="mb-0">09.00 AM - 12.00 PM</p>
+              </div>
+              <div class="col-lg-3 col-md-6">
+                <h4 class="text-light mb-4">Services</h4>
+                <a class="btn btn-link" href="">Diagnostic Test</a>
+                <a class="btn btn-link" href="">Engine Servicing</a>
+                <a class="btn btn-link" href="">Tires Replacement</a>
+                <a class="btn btn-link" href="">Oil Changing</a>
+                <a class="btn btn-link" href="">Vacuam Cleaning</a>
+              </div>
+              <div class="col-lg-3 col-md-6">
+                <h4 class="text-light mb-4">Newsletter</h4>
+                <p>Dolor amet sit justo amet elitr clita ipsum elitr est.</p>
+                <div class="position-relative mx-auto" style="max-width: 400px">
+                  <input
+                    class="form-control border-0 w-100 py-3 ps-4 pe-5"
+                    type="text"
+                    placeholder="Your email"
+                  />
+                  <button
+                    type="button"
+                    class="btn btn-primary py-2 position-absolute top-0 end-0 mt-2 me-2"
+                  >
+                    SignUp
+                  </button>
+                </div>
+              </div>
+            </div>
           </div>
-
-          <div class="col-lg-6 col-12 d-flex justify-content-lg-end align-items-center">
-            <ul class="social-icon d-flex justify-content-lg-end">
-              <li class="social-icon-item">
-                <a href="#" class="social-icon-link">
-                  <span class="bi-twitter"></span>
-                </a>
-              </li>
-
-              <li class="social-icon-item">
-                <a href="#" class="social-icon-link">
-                  <span class="bi-apple"></span>
-                </a>
-              </li>
-
-              <li class="social-icon-item">
-                <a href="#" class="social-icon-link">
-                  <span class="bi-instagram"></span>
-                </a>
-              </li>
-
-              <li class="social-icon-item">
-                <a href="#" class="social-icon-link">
-                  <span class="bi-youtube"></span>
-                </a>
-              </li>
-
-              <li class="social-icon-item">
-                <a href="#" class="social-icon-link">
-                  <span class="bi-pinterest"></span>
-                </a>
-              </li>
-            </ul>
-          </div>
         </div>
-      </div>
-    </div>
+        <div class="container">
+          <div class="copyright">
+            <div class="row">
+              <div class="col-md-6 text-center text-md-start mb-3 mb-md-0">
+                &copy; <a class="border-bottom" href="#">Your Site Name</a>, All
+                Right Reserved.
 
-    <div class="container">
-      <div class="row">
-        <div class="col-lg-6 col-12 mb-4 pb-2">
-          <h5 class="site-footer-title mb-3">Links</h5>
-
-          <ul class="site-footer-links">
-            <li class="site-footer-link-item">
-              <a href="#" class="site-footer-link">Home</a>
-            </li>
-
-            <li class="site-footer-link-item">
-              <a href="#" class="site-footer-link">About</a>
-            </li>
-
-            <li class="site-footer-link-item">
-              <a href="#" class="site-footer-link">Artists</a>
-            </li>
-
-            <li class="site-footer-link-item">
-              <a href="#" class="site-footer-link">Schedule</a>
-            </li>
-
-            <li class="site-footer-link-item">
-              <a href="#" class="site-footer-link">Pricing</a>
-            </li>
-
-            <li class="site-footer-link-item">
-              <a href="#" class="site-footer-link">Contact</a>
-            </li>
-          </ul>
-        </div>
-
-        <div class="col-lg-3 col-md-6 col-12 mb-4 mb-lg-0">
-          <h5 class="site-footer-title mb-3">Have a question?</h5>
-
-          <p class="text-white d-flex mb-1">
-            <a href="tel: 090-080-0760" class="site-footer-link"> 090-080-0760 </a>
-          </p>
-
-          <p class="text-white d-flex">
-            <a href="mailto:hello@company.com" class="site-footer-link"> hello@company.com </a>
-          </p>
-        </div>
-
-        <div class="col-lg-3 col-md-6 col-11 mb-4 mb-lg-0 mb-md-0">
-          <h5 class="site-footer-title mb-3">Location</h5>
-
-          <p class="text-white d-flex mt-3 mb-2">
-            Silang Junction South, Tagaytay, Cavite, Philippines
-          </p>
-
-          <a class="link-fx-1 color-contrast-higher mt-3" href="#">
-            <span>Our Maps</span>
-            <svg class="icon" viewBox="0 0 32 32" aria-hidden="true">
-              <g fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round">
-                <circle cx="16" cy="16" r="15.5"></circle>
-                <line x1="10" y1="18" x2="16" y2="12"></line>
-                <line x1="16" y1="12" x2="22" y2="18"></line>
-              </g>
-            </svg>
-          </a>
-        </div>
-      </div>
-    </div>
-
-    <div class="site-footer-bottom">
-      <div class="container">
-        <div class="row">
-          <div class="col-lg-3 col-12 mt-5">
-            <p class="copyright-text">Copyright © 2036 Festava Live Company</p>
-            <p class="copyright-text">
-              Distributed by: <a href="https://themewagon.com">ThemeWagon</a>
-            </p>
-          </div>
-
-          <div class="col-lg-8 col-12 mt-lg-5">
-            <ul class="site-footer-links">
-              <li class="site-footer-link-item">
-                <a href="#" class="site-footer-link">Terms &amp; Conditions</a>
-              </li>
-
-              <li class="site-footer-link-item">
-                <a href="#" class="site-footer-link">Privacy Policy</a>
-              </li>
-
-              <li class="site-footer-link-item">
-                <a href="#" class="site-footer-link">Your Feedback</a>
-              </li>
-            </ul>
+                <!--/*** This template is free as long as you keep the footer author’s credit link/attribution link/backlink. If you'd like to use the template without the footer author’s credit link/attribution link/backlink, you can purchase the Credit Removal License from "https://htmlcodex.com/credit-removal". Thank you for your support. ***/-->
+                Designed By
+                <a class="border-bottom" href="https://htmlcodex.com"
+                  >HTML Codex</a
+                >
+                <br />Distributed By:
+                <a
+                  class="border-bottom"
+                  href="https://themewagon.com"
+                  target="_blank"
+                  >ThemeWagon</a
+                >
+              </div>
+              <div class="col-md-6 text-center text-md-end">
+                <div class="footer-menu">
+                  <a href="">Home</a>
+                  <a href="">Cookies</a>
+                  <a href="">Help</a>
+                  <a href="">FQAs</a>
+                </div>
+              </div>
+            </div>
           </div>
         </div>
       </div>
-    </div>
-  </footer>
+    </footer>
+  </div>
 </template>
 
 <style scoped></style>

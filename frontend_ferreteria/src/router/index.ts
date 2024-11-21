@@ -12,14 +12,20 @@ const router = createRouter({
       component: HomeView,
     },
     {
+      path: '/login',
+      name: 'login',
+      component: () => import('../views/LoginView.vue'),
+    },
+    {
       path: '/about',
       name: 'about',
       component: () => import('../views/AboutView.vue'),
     },
+
     {
-      path: '/categorias',
-      name: 'categorias',
-      component: () => import('../views/CategoriaView.vue'),
+      path: '/productos',
+      name: 'productos',
+      component: () => import('../views/ProductoView.vue'),
     },
     {
       path: '/clientes',
@@ -27,20 +33,20 @@ const router = createRouter({
       component: () => import('../views/ClienteView.vue'),
     },
     {
-      path: '/productos',
-      name: 'productos',
-      component: () => import('../views/ProductoView.vue'),
+      path: '/ventas',
+      name: 'ventas',
+      component: () => import('../views/VentaView.vue'),
     },
     {
-      path: '/login',
-      name: 'login',
-      component: () => import('../views/LoginView.vue'),
+      path: '/detalles_ventas',
+      name: 'detalles_ventas',
+      component: () => import('../views/DetalleVentaView.vue'),
     },
   ],
 })
 
 router.beforeEach(async to => {
-  const publicPages = ['/', '/login']
+  const publicPages = ['/login']
   const authRequired = !publicPages.includes(to.path)
   const authStore = useAuthStore()
 

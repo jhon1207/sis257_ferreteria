@@ -1,5 +1,5 @@
 export interface Cliente {
-  id: number
+  id_venta: number
   nombre: string
   apellido: string
   telefono: string

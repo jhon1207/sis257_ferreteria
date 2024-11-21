@@ -63,7 +63,7 @@ async function handleSave() {
       subtotal: detalleVenta.value.subtotal,
     }
     if (props.modoEdicion) {
-      await http.patch(`${ENDPOINT}/${detalleVenta.value.id}`, body)
+      await http.patch(`${ENDPOINT}/${detalleVenta.value.id_detalle}`, body)
     } else {
       await http.post(ENDPOINT, body)
     }
