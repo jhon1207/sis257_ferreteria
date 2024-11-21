@@ -15,16 +15,10 @@ async function bootstrap() {
     .setTitle('API Rest SIS257')
     .setDescription('API Rest de la materia Desarrollo de App Int/Internet II')
     .setVersion('1.0')
-    .addTag('categorias, clientes, detalles_venta, productos, usuarios, auth')
-    .addBearerAuth({
-      type: 'http',
-      scheme: 'bearer',
-      bearerFormat: 'JWT',
-      in: 'header',
-    })
+    .addTag('productos')
     .build();
   const document = SwaggerModule.createDocument(app, config);
-  SwaggerModule.setup('apidoc', app, document);
+  SwaggerModule.setup('apidoc', app, document)
 
   await app.listen(process.env.PORT);
   console.log(`App corriendon ${await app.getUrl()}/apidoc`);

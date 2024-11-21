@@ -1,9 +1,10 @@
-import { Injectable, NotFoundException } from '@nestjs/common';
+import { ConflictException, Injectable, NotFoundException } from '@nestjs/common';
 import { CreateVentaDto } from './dto/create-venta.dto';
 import { UpdateVentaDto } from './dto/update-venta.dto';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 import { Venta } from './entities/venta.entity';
+import { Cliente } from 'src/clientes/entities/cliente.entity';
 
 @Injectable()
 export class VentasService {
@@ -13,19 +14,36 @@ export class VentasService {
   ) {}
 
   async create(createVentaDto: CreateVentaDto): Promise<Venta> {
-    const nuevaVenta = this.ventasRepository.create(createVentaDto);
-    return this.ventasRepository.save(nuevaVenta);
+    const existe = await this.ventasRepository.findOne({
+      where: {
+        total: createVentaDto.total,
+        cliente: { id: createVentaDto.id_cliente },
+      },
+      relations: ['cliente'],
+    });
+
+    if (existe) {
+      throw new ConflictException('La venta ya existe');
+    }
+
+    const ventaNueva = this.ventasRepository.create({
+      total: createVentaDto.total,
+      cliente: { id: createVentaDto.id_cliente },
+    });
+
+    return this.ventasRepository.save(ventaNueva);
   }
 
+
   findAll(): Promise<Venta[]> {
-    return this.ventasRepository.find({ relations: ['cliente', 'usuario'] });
+    return this.ventasRepository.find({ relations: ['cliente'] });
   }
 
   async findOne(id: number): Promise<Venta> {
     const venta = await this.ventasRepository.findOne({
       where: { id },
 
-      relations: ['cliente', 'usuario'],
+      relations: ['cliente'],
     });
     if (!venta) {
       throw new NotFoundException(`Venta con ID ${id} no encontrada`);
@@ -35,11 +53,9 @@ export class VentasService {
 
   async update(id: number, updateVentaDto: UpdateVentaDto): Promise<Venta> {
     const venta = await this.findOne(id);
-    if (!venta) {
-      throw new NotFoundException(`Venta con ID ${id} no encontrada`);
-    }
-    await this.ventasRepository.update(id, updateVentaDto);
-    return this.findOne(id);
+    const ventaUpdate = Object.assign(venta, updateVentaDto);
+    ventaUpdate.cliente = { id: updateVentaDto.id_cliente } as Cliente;
+    return this.ventasRepository.save(ventaUpdate);
   }
 
   async remove(id: string): Promise<void> {

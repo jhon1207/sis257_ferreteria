@@ -20,7 +20,11 @@ export class DetallesVentasService {
 
   async create(createDetallesVentaDto: CreateDetallesVentaDto): Promise<DetalleVenta> {
     const venta = await this.ventasRepository.findOneBy({
+<<<<<<< HEAD
+      id: createDetallesVentaDto.id_venta,
+=======
       id: createDetallesVentaDto.id,
+>>>>>>> c99a4fd29b138cec348ee33b947b02e9c9dfbb00
     });
     if (!venta) {
       throw new NotFoundException(`La venta con ID ${createDetallesVentaDto.id} no existe`);
@@ -50,9 +54,9 @@ export class DetallesVentasService {
     return this.detallesVentasRepository.find({ relations: ['venta', 'producto'] });
   }
 
-  async findOne(id: string): Promise<DetalleVenta> {
+  async findOne(id: number): Promise<DetalleVenta> {
     const detalleVenta = await this.detallesVentasRepository.findOne({
-      where: { id_detalle: id },
+      where: { id },
       relations: ['venta', 'producto'],
     });
     if (!detalleVenta) {
@@ -61,7 +65,7 @@ export class DetallesVentasService {
     return detalleVenta;
   }
 
-  async update(id: string, updateDetallesVentaDto: UpdateDetallesVentaDto): Promise<DetalleVenta> {
+  async update(id: number, updateDetallesVentaDto: UpdateDetallesVentaDto): Promise<DetalleVenta> {
     const detalleVenta = await this.findOne(id);
 
     Object.assign(detalleVenta, updateDetallesVentaDto);
@@ -69,8 +73,8 @@ export class DetallesVentasService {
     return this.detallesVentasRepository.save(detalleVenta);
   }
 
-  async remove(id: string): Promise<void> {
+  async remove(id: number): Promise<void> {
     const detalleVenta = await this.findOne(id);
-    await this.detallesVentasRepository.delete(detalleVenta.id_detalle);
+    await this.detallesVentasRepository.delete(detalleVenta.id);
   }
 }

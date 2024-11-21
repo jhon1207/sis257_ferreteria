@@ -10,6 +10,7 @@ import {
   Min,
   MinLength,
 } from 'class-validator';
+import { Decimal128 } from 'typeorm';
 
 export class CreateProductoDto {
   @ApiProperty()

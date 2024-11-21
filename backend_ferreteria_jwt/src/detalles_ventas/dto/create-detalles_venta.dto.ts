@@ -2,6 +2,10 @@ import { ApiProperty } from '@nestjs/swagger';
 import { IsDefined, IsNotEmpty, IsNumber, IsUUID } from 'class-validator';
 
 export class CreateDetallesVentaDto {
+<<<<<<< HEAD
+=======
+
+>>>>>>> fbe64d1fc9f0c8e9e140bef705243c7cce7031b3
   @ApiProperty()
   @IsNotEmpty({ message: 'El campo cantidad no debe ser vacío' })
   @IsNumber({}, { message: 'El campo cantidad debe ser un número' })

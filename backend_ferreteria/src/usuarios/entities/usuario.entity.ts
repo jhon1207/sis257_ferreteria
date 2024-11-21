@@ -45,8 +45,8 @@ export class Usuario {
   fechaEliminacion: Date;
 
   // Relaciones
-  @OneToMany(() => Venta, venta => venta.usuario)
-  ventas: Venta[];
+  //@OneToMany(() => Venta, venta => venta.usuario)
+  //ventas: Venta[];
 
   // Métodos
   @BeforeInsert()

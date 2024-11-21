@@ -41,4 +41,8 @@ export class Cliente {
 
   @OneToMany(() => Venta, venta => venta.cliente)
   ventas: Venta[];
+<<<<<<< HEAD
+=======
+
+>>>>>>> fbe64d1fc9f0c8e9e140bef705243c7cce7031b3
 }

@@ -20,6 +20,20 @@ export class ProductosController {
   }
 
   @Get(':id')
+<<<<<<< HEAD
+  findOne(@Param('id') id: number) {
+    return this.productosService.findOne(id);
+  }
+
+  @Patch(':id')
+  update(@Param('id') id: number, @Body() updateProductoDto: UpdateProductoDto) {
+    return this.productosService.update(id, updateProductoDto);
+  }
+
+  @Delete(':id')
+  remove(@Param('id') id: number) {
+    return this.productosService.remove(id);
+=======
   findOne(@Param('id') id: string) {
     return this.productosService.findOne(+id);
   }
@@ -32,5 +46,6 @@ export class ProductosController {
   @Delete(':id')
   remove(@Param('id') id: string) {
     return this.productosService.remove(+id);
+>>>>>>> c99a4fd29b138cec348ee33b947b02e9c9dfbb00
   }
 }

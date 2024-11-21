@@ -3,6 +3,7 @@ import {
   CreateDateColumn,
   DeleteDateColumn,
   Entity,
+  ManyToOne,
   OneToMany,
   PrimaryGeneratedColumn,
   UpdateDateColumn,
@@ -40,4 +41,5 @@ export class Cliente {
 
   @OneToMany(() => Venta, venta => venta.cliente)
   ventas: Venta[];
+
 }

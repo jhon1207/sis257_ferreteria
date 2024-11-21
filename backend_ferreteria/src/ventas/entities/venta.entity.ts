@@ -15,24 +15,35 @@ import { DetalleVenta } from '../../detalles_ventas/entities/detalles_venta.enti
 
 @Entity('ventas')
 export class Venta {
+<<<<<<< HEAD
+  @PrimaryGeneratedColumn()
+=======
   @PrimaryGeneratedColumn('uuid')
+>>>>>>> c99a4fd29b138cec348ee33b947b02e9c9dfbb00
   id: number;
 
   @CreateDateColumn({ name: 'fecha' })
   fecha: Date;
 
+<<<<<<< HEAD
+=======
   @ManyToOne(() => Cliente, (Cliente) => cliente.ventas)
   @JoinColumn({ name: 'id_cliente', referencedColumnName: 'id' })
   genero: Cliente;
 
+>>>>>>> c99a4fd29b138cec348ee33b947b02e9c9dfbb00
   @Column('decimal', { precision: 10, scale: 2, nullable: false })
   total: number;
 
-  @ManyToOne(() => Usuario, usuario => usuario.ventas, { nullable: false })
-  usuario: Usuario;
+  //@ManyToOne(() => Usuario, usuario => usuario.ventas, { nullable: false })
+  //usuario: Usuario;
 
-  @OneToMany(() => DetalleVenta, detalleVenta => detalleVenta.venta, { cascade: true })
-  detalleVentas: DetalleVenta[];
+  @ManyToOne(() => Cliente, cliente => cliente.ventas)
+  @JoinColumn({ name: 'id_cliente', referencedColumnName: 'id' })
+  cliente: Cliente;
+
+  @OneToMany(() => DetalleVenta, detalleventa => detalleventa.venta)
+  detalleventas: DetalleVenta[];
 
   @CreateDateColumn({ name: 'fecha_creacion' })
   fechaCreacion: Date;
