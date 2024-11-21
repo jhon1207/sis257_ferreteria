@@ -1,24 +1,20 @@
 import {
+  BeforeInsert,
+  BeforeUpdate,
   Column,
   CreateDateColumn,
   DeleteDateColumn,
   Entity,
-  OneToMany,
   PrimaryGeneratedColumn,
   UpdateDateColumn,
-  BeforeInsert,
-  BeforeUpdate,
 } from 'typeorm';
-import { Venta } from '../../ventas/entities/venta.entity';
 import * as bcrypt from 'bcrypt';
 
 @Entity('usuarios')
 export class Usuario {
-  // Primary Key
   @PrimaryGeneratedColumn('identity')
   id: number;
 
-  // Campos principales
   @Column('varchar', { length: 15 })
   usuario: string;
 
@@ -34,7 +30,6 @@ export class Usuario {
   @Column('boolean')
   premium: boolean;
 
-  // Timestamps
   @CreateDateColumn({ name: 'fecha_creacion' })
   fechaCreacion: Date;
 
@@ -44,11 +39,6 @@ export class Usuario {
   @DeleteDateColumn({ name: 'fecha_eliminacion', select: false })
   fechaEliminacion: Date;
 
-  // Relaciones
-  //@OneToMany(() => Venta, venta => venta.usuario)
-  //ventas: Venta[];
-
-  // Métodos
   @BeforeInsert()
   @BeforeUpdate()
   async hashPassword() {

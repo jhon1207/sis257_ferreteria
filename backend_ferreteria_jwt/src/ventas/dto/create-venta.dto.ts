@@ -17,11 +17,7 @@ export class CreateVentaDto {
   @IsNotEmpty({ message: 'El campo id_cliente es obligatorio' })
   @IsNumber({}, { message: 'El campo id_cliente debe ser de tipo numérico' })
   readonly id_cliente: number;
-<<<<<<< HEAD
   /*
-=======
-/*
->>>>>>> fbe64d1fc9f0c8e9e140bef705243c7cce7031b3
   @ApiProperty({
     description: 'ID del usuario que registra la venta',
     example: 2,

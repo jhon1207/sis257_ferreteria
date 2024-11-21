@@ -25,7 +25,7 @@ function mostrarEliminarConfirm(cliente: Cliente) {
 }
 
 async function eliminar() {
-  await http.delete(`${ENDPOINT}/${clienteDelete.value?.id}`)
+  await http.delete(`${ENDPOINT}/${clienteDelete.value?.id_venta}`)
   obtenerLista()
   mostrarConfirmDialog.value = false
 }
@@ -51,7 +51,7 @@ defineExpose({ obtenerLista })
         </tr>
       </thead>
       <tbody>
-        <tr v-for="(cliente, index) in clientes" :key="cliente.id">
+        <tr v-for="(cliente, index) in clientes" :key="cliente.id_venta">
           <td>{{ index + 1 }}</td>
           <td>{{ cliente.nombre }}</td>
           <td>{{ cliente.apellido }}</td>
@@ -59,36 +59,17 @@ defineExpose({ obtenerLista })
           <td>{{ cliente.email }}</td>
           <td>{{ cliente.direccion }}</td>
           <td>
-            <Button
-              icon="pi pi-pencil"
-              aria-label="Editar"
-              text
-              @click="emitirEdicion(cliente)"
-            />
-            <Button
-              icon="pi pi-trash"
-              aria-label="Eliminar"
-              text
-              @click="mostrarEliminarConfirm(cliente)"
-            />
+            <Button icon="pi pi-pencil" aria-label="Editar" text @click="emitirEdicion(cliente)" />
+            <Button icon="pi pi-trash" aria-label="Eliminar" text @click="mostrarEliminarConfirm(cliente)" />
           </td>
         </tr>
       </tbody>
     </table>
 
-    <Dialog
-      v-model:visible="mostrarConfirmDialog"
-      header="Confirmar Eliminación"
-      :style="{ width: '25rem' }"
-    >
+    <Dialog v-model:visible="mostrarConfirmDialog" header="Confirmar Eliminación" :style="{ width: '25rem' }">
       <p>¿Estás seguro de que deseas eliminar este registro?</p>
       <div class="flex justify-end gap-2">
-        <Button
-          type="button"
-          label="Cancelar"
-          severity="secondary"
-          @click="mostrarConfirmDialog = false"
-        />
+        <Button type="button" label="Cancelar" severity="secondary" @click="mostrarConfirmDialog = false" />
         <Button type="button" label="Eliminar" @click="eliminar" />
       </div>
     </Dialog>

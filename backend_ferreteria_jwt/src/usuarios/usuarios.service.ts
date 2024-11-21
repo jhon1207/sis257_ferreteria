@@ -23,13 +23,12 @@ export class UsuariosService {
     });
     if (existe) throw new ConflictException('El usuario ya existe');
 
-    const usuario = this.usuariosRepository.create({
-      usuario: createUsuarioDto.usuario.trim(),
-      clave: process.env.DEFAULT_PASSWORD,
-      email: createUsuarioDto.email.trim(),
-      rol: createUsuarioDto.rol.trim(),
-      premium: createUsuarioDto.premium,
-    });
+    const usuario = new Usuario();
+    usuario.usuario = createUsuarioDto.usuario.trim();
+    usuario.clave = process.env.DEFAULT_PASSWORD;
+    usuario.email = createUsuarioDto.email.trim();
+    usuario.rol = createUsuarioDto.rol.trim();
+    usuario.premium = createUsuarioDto.premium;
 
     return this.usuariosRepository.save(usuario);
   }
@@ -44,10 +43,18 @@ export class UsuariosService {
     return usuario;
   }
 
-  async update(id: number, updateUsuarioDto: UpdateUsuarioDto): Promise<Usuario> {
+  async update(
+    id: number,
+    updateUsuarioDto: UpdateUsuarioDto,
+  ): Promise<Usuario> {
     const usuario = await this.findOne(id);
     const usuarioUpdate = Object.assign(usuario, updateUsuarioDto);
     return this.usuariosRepository.save(usuarioUpdate);
+  }
+
+  async remove(id: number) {
+    const usuario = await this.findOne(id);
+    return this.usuariosRepository.softRemove(usuario);
   }
 
   async validate(usuario: string, clave: string): Promise<Usuario> {
@@ -58,16 +65,11 @@ export class UsuariosService {
 
     if (!usuarioOk) throw new NotFoundException('Usuario inexistente');
 
-    if (!(await usuarioOk.validatePassword(clave))) {
+    if (!(await usuarioOk?.validatePassword(clave))) {
       throw new UnauthorizedException('Clave incorrecta');
     }
 
     delete usuarioOk.clave;
     return usuarioOk;
-  }
-
-  async remove(id: number): Promise<void> {
-    const usuario = await this.findOne(id);
-    await this.usuariosRepository.softRemove(usuario);
   }
 }

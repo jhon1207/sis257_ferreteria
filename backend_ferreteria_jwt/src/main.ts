@@ -12,20 +12,19 @@ async function bootstrap() {
   app.enableCors();
 
   const config = new DocumentBuilder()
-    .setTitle('API Rest SIS257')
+    .setTitle('API Rest Laboratorio SIS257')
     .setDescription('API Rest de la materia Desarrollo de App Int/Internet II')
     .setVersion('1.0')
     .addTag('productos')
-<<<<<<< HEAD
-    .addBearerAuth({ type: 'http', scheme: 'bearer', bearerFormat: 'JWT', in: 'header' })
+    .addBearerAuth({
+      type: 'http',
+      scheme: 'bearer',
+      bearerFormat: 'JWT',
+      in: 'header',
+    })
     .build();
   const document = SwaggerModule.createDocument(app, config);
   SwaggerModule.setup('apidoc', app, document);
-=======
-    .build();
-  const document = SwaggerModule.createDocument(app, config);
-  SwaggerModule.setup('apidoc', app, document)
->>>>>>> fbe64d1fc9f0c8e9e140bef705243c7cce7031b3
 
   await app.listen(process.env.PORT);
   console.log(`App corriendon ${await app.getUrl()}/apidoc`);

@@ -9,6 +9,8 @@ import { UsuariosModule } from './usuarios/usuarios.module';
 import { VentasModule } from './ventas/ventas.module';
 import { DetallesVentasModule } from './detalles_ventas/detalles_ventas.module';
 import { CategoriasModule } from './categorias/categorias.module';
+import { AuthModule } from './auth/auth.module';
+
 @Module({
   imports: [
     ConfigModule.forRoot(),
@@ -29,6 +31,7 @@ import { CategoriasModule } from './categorias/categorias.module';
     VentasModule,
     DetallesVentasModule,
     CategoriasModule,
+    AuthModule,
   ],
   controllers: [AppController],
   providers: [AppService],

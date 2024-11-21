@@ -1,5 +1,12 @@
 import { ApiProperty } from '@nestjs/swagger';
-import { IsBooleanString, IsDefined, IsNotEmpty, IsString, MaxLength } from 'class-validator';
+import {
+  IsBoolean,
+  IsBooleanString,
+  IsDefined,
+  IsNotEmpty,
+  IsString,
+  MaxLength,
+} from 'class-validator';
 
 export class CreateUsuarioDto {
   @ApiProperty()
@@ -28,6 +35,6 @@ export class CreateUsuarioDto {
 
   @ApiProperty()
   @IsDefined({ message: 'El campo premium debe estar definido' })
-  @IsBooleanString({ message: 'El campo premium debe ser de tipo lógico' })
+  @IsBoolean({ message: 'El campo premium debe ser de tipo lógico' })
   readonly premium: boolean;
 }

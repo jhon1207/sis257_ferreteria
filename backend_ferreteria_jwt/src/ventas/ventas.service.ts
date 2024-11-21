@@ -34,10 +34,6 @@ export class VentasService {
     return this.ventasRepository.save(ventaNueva);
   }
 
-<<<<<<< HEAD
-=======
-
->>>>>>> fbe64d1fc9f0c8e9e140bef705243c7cce7031b3
   findAll(): Promise<Venta[]> {
     return this.ventasRepository.find({ relations: ['cliente'] });
   }
