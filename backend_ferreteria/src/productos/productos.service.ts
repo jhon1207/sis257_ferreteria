@@ -47,9 +47,9 @@ export class ProductosService {
       .getMany();
   }
 
-  async findOne(id: string): Promise<Producto> {
+  async findOne(id: number): Promise<Producto> {
     const producto = await this.productosRepository.findOne({
-      where: { id_producto: id },
+      where: { id },
       relations: ['categoria'],
     });
     if (!producto) {
@@ -58,15 +58,15 @@ export class ProductosService {
     return producto;
   }
 
-  async update(id: string, updateProductoDto: UpdateProductoDto): Promise<Producto> {
+  async update(id: number, updateProductoDto: UpdateProductoDto): Promise<Producto> {
     const producto = await this.findOne(id);
     const productoUpdate = Object.assign(producto, updateProductoDto);
     productoUpdate.categoria = { id: updateProductoDto.idCategoria } as Categoria;
     return this.productosRepository.save(productoUpdate);
   }
 
-  async remove(id: string) {
+  async remove(id: number) {
     const producto = await this.findOne(id);
-    return this.productosRepository.delete(producto.id_producto);
+    return this.productosRepository.delete(producto.id);
   }
 }

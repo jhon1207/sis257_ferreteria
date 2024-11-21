@@ -21,19 +21,19 @@ export class VentasService {
     return this.ventasRepository.find({ relations: ['cliente', 'usuario'] });
   }
 
-  async findOne(id_venta: string): Promise<Venta> {
+  async findOne(id: number): Promise<Venta> {
     const venta = await this.ventasRepository.findOne({
-      where: { id_venta },
+      where: { id },
 
       relations: ['cliente', 'usuario'],
     });
     if (!venta) {
-      throw new NotFoundException(`Venta con ID ${id_venta} no encontrada`);
+      throw new NotFoundException(`Venta con ID ${id} no encontrada`);
     }
     return venta;
   }
 
-  async update(id: string, updateVentaDto: UpdateVentaDto): Promise<Venta> {
+  async update(id: number, updateVentaDto: UpdateVentaDto): Promise<Venta> {
     const venta = await this.findOne(id);
     if (!venta) {
       throw new NotFoundException(`Venta con ID ${id} no encontrada`);

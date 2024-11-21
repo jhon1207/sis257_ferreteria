@@ -7,21 +7,23 @@ import {
   OneToMany,
   UpdateDateColumn,
   DeleteDateColumn,
+  JoinColumn,
 } from 'typeorm';
 import { Cliente } from '../../clientes/entities/cliente.entity';
 import { Usuario } from '../../usuarios/entities/usuario.entity';
-import { DetalleVenta } from '../../detalles_ventas/entities/detalles_venta.entity'; // Asegúrate de importar DetalleVenta
+import { DetalleVenta } from '../../detalles_ventas/entities/detalles_venta.entity';
 
 @Entity('ventas')
 export class Venta {
   @PrimaryGeneratedColumn('uuid')
-  id_venta: string;
+  id: number;
 
   @CreateDateColumn({ name: 'fecha' })
   fecha: Date;
 
-  @ManyToOne(() => Cliente, cliente => cliente.ventas, { nullable: false })
-  cliente: Cliente;
+  @ManyToOne(() => Cliente, (Cliente) => cliente.ventas)
+  @JoinColumn({ name: 'id_cliente', referencedColumnName: 'id' })
+  genero: Cliente;
 
   @Column('decimal', { precision: 10, scale: 2, nullable: false })
   total: number;

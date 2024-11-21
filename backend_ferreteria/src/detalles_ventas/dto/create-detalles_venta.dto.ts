@@ -5,12 +5,12 @@ export class CreateDetallesVentaDto {
   @ApiProperty()
   @IsUUID('4', { message: 'El ID de la venta debe ser un UUID válido' })
   @IsNotEmpty({ message: 'El campo id_venta no debe ser vacío' })
-  readonly id_venta: string;
+  readonly id: number;
 
   @ApiProperty()
   @IsUUID('4', { message: 'El ID del producto debe ser un UUID válido' })
   @IsNotEmpty({ message: 'El campo id_producto no debe ser vacío' })
-  readonly id_producto: string;
+  readonly id_producto: number;
 
   @ApiProperty()
   @IsNotEmpty({ message: 'El campo cantidad no debe ser vacío' })

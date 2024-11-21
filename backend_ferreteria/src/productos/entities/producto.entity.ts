@@ -5,7 +5,7 @@ import { DetalleVenta } from 'src/detalles_ventas/entities/detalles_venta.entity
 @Entity('productos')
 export class Producto {
   @PrimaryGeneratedColumn('uuid')
-  id_producto: string;
+  id: number;
 
   @Column({ name: 'nombre_producto', type: 'varchar', length: 255 })
   nombreProducto: string;
