@@ -14,9 +14,9 @@ const props = defineProps({
   mostrar: Boolean,
   producto: {
     type: Object as () => Producto,
-    default: () => ({}) as Producto,
+    default: () => ({}) as Producto
   },
-  modoEdicion: Boolean,
+  modoEdicion: Boolean
 })
 const emit = defineEmits(['guardar', 'close'])
 
@@ -24,38 +24,30 @@ const categorias = ref<Categoria[]>([])
 
 const categoria = ref<Categoria>({} as Categoria)
 const producto = ref<Producto>({ ...props.producto })
-const nombreProducto = ref('')
-const descripcion = ref('')
-const precio = ref('')
-const stock = ref('')
 
 const dialogVisible = computed({
   get: () => props.mostrar,
-  set: value => {
+  set: (value) => {
     if (!value) emit('close')
-  },
+  }
 })
 
 // Watch para cargar datos al editar
 watch(
   () => props.producto,
-  async newVal => {
+  async (newVal) => {
     producto.value = { ...newVal }
     categoria.value = producto.value?.categoria ?? ({} as Categoria)
     if (categoria.value?.id) {
       await obtenerCategorias()
       producto.value.categoria =
-        categorias.value.find(
-          categoria => categoria.id === producto.value.categoria.id,
-        ) || ({} as Categoria)
+        categorias.value.find((categoria) => categoria.id === producto.value.categoria.id) || ({} as Categoria)
     }
-  },
+  }
 )
 
 async function obtenerCategorias() {
-  categorias.value = await http
-    .get('categorias')
-    .then(response => response.data)
+  categorias.value = await http.get('categorias').then((response) => response.data)
 }
 
 async function handleSave() {
@@ -83,85 +75,42 @@ async function handleSave() {
 
 watch(
   () => props.mostrar,
-  nuevoValor => {
+  (nuevoValor) => {
     if (nuevoValor) {
       obtenerCategorias()
     }
-  },
+  }
 )
 </script>
 
 <template>
   <div class="card flex justify-center">
-    <Dialog
-      v-model:visible="dialogVisible"
-      :header="(props.modoEdicion ? 'Editar' : 'Crear') + ' Producto'"
-      style="width: 25rem"
-    >
+    <Dialog v-model:visible="dialogVisible" :header="(props.modoEdicion ? 'Editar' : 'Crear') + ' Producto'"
+      style="width: 25rem">
       <div class="flex items-center gap-4 mb-4">
         <label for="categoria" class="font-semibold w-4">Categorias</label>
-        <Select
-          id="categoria"
-          v-model="categoria"
-          :options="categorias"
-          optionLabel="descripcion"
-          class="flex-auto"
-        />
+        <Select id="categoria" v-model="categoria" :options="categorias" optionLabel="descripcion" class="flex-auto" />
       </div>
       <div class="flex items-center gap-4 mb-4">
-        <label for="nombreProducto" class="font-semibold w-4"
-          >Nombre Producto</label
-        >
-        <InputText
-          id="nombreProducto"
-          v-model="producto.nombreProducto"
-          class="flex-auto"
-          autocomplete="off"
-        />
+        <label for="nombreProducto" class="font-semibold w-4">Nombre Producto</label>
+        <InputText id="nombreProducto" v-model="producto.nombreProducto" class="flex-auto" autocomplete="off" />
       </div>
       <div class="flex items-center gap-4 mb-4">
         <label for="descripcion" class="font-semibold w-4">Descripcion</label>
-        <InputText
-          id="descripcion"
-          v-model="producto.descripcion"
-          class="flex-auto"
-          autocomplete="off"
-        />
+        <InputText id="descripcion" v-model="producto.descripcion" class="flex-auto" autocomplete="off" />
       </div>
       <div class="flex items-center gap-4 mb-4">
         <label for="precio" class="font-semibold w-4">Precio</label>
-        <input
-          type="number"
-          class="form-control"
-          v-model="producto.precio"
-          placeholder="Precio"
-          required
-        />
+        <input type="number" class="form-control" v-model="producto.precio" placeholder="Precio" required />
       </div>
       <div class="flex items-center gap-4 mb-4">
         <label for="stock" class="font-semibold w-4">Stock</label>
-        <input
-          type="number"
-          class="form-control"
-          v-model="producto.stock"
-          placeholder="stock"
-          required
-        />
+        <input type="number" class="form-control" v-model="producto.stock" placeholder="stock" required />
       </div>
       <div class="flex justify-end gap-2">
-        <Button
-          type="button"
-          label="Cancelar"
-          icon="pi pi-times"
-          severity="secondary"
-          @click="dialogVisible = false"
-        ></Button>
-        <Button
-          type="button"
-          label="Guardar"
-          icon="pi pi-save"
-          @click="handleSave"
-        ></Button>
+        <Button type="button" label="Cancelar" icon="pi pi-times" severity="secondary"
+          @click="dialogVisible = false"></Button>
+        <Button type="button" label="Guardar" icon="pi pi-save" @click="handleSave"></Button>
       </div>
     </Dialog>
   </div>
