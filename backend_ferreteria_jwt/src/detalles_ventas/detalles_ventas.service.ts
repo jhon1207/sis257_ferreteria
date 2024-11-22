@@ -19,13 +19,6 @@ export class DetallesVentasService {
   ) {}
 
   async create(createDetallesVentaDto: CreateDetallesVentaDto): Promise<DetalleVenta> {
-    const venta = await this.ventasRepository.findOneBy({
-      id: createDetallesVentaDto.idVenta,
-    });
-    if (!venta) {
-      throw new NotFoundException(`La venta con ID ${createDetallesVentaDto.idVenta} no existe`);
-    }
-
     const producto = await this.productosRepository.findOneBy({
       id: createDetallesVentaDto.idProducto,
     });
@@ -36,7 +29,6 @@ export class DetallesVentasService {
     }
 
     const detalleVenta = this.detallesVentasRepository.create({
-      venta,
       producto,
       cantidad: createDetallesVentaDto.cantidad,
       precioUnitario: createDetallesVentaDto.precioUnitario,
@@ -47,13 +39,13 @@ export class DetallesVentasService {
   }
 
   async findAll(): Promise<DetalleVenta[]> {
-    return this.detallesVentasRepository.find({ relations: ['venta', 'producto'] });
+    return this.detallesVentasRepository.find({ relations: [ 'producto' ] });
   }
 
   async findOne(id: number): Promise<DetalleVenta> {
     const detalleVenta = await this.detallesVentasRepository.findOne({
       where: { id },
-      relations: ['venta', 'producto'],
+      relations: ['producto'],
     });
     if (!detalleVenta) {
       throw new NotFoundException(`El detalle de venta con ID ${id} no existe`);

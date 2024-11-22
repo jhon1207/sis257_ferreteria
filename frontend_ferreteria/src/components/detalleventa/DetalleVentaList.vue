@@ -42,7 +42,6 @@ defineExpose({ obtenerLista })
       <thead>
         <tr>
           <th>Nro.</th>
-          <th>Ventas</th>
           <th>Productos</th>
           <th>Cantidad</th>
           <th>Precio Unitario</th>
@@ -53,7 +52,6 @@ defineExpose({ obtenerLista })
       <tbody>
         <tr v-for="(detalleVenta, index) in detalleVenta" :key="detalleVenta.id">
           <td>{{ index + 1 }}</td>
-          <td>{{ detalleVenta.venta.total }}</td>
           <td>{{ detalleVenta.producto.nombreProducto }}</td>
           <td>{{ detalleVenta.cantidad }}</td>
           <td>{{ detalleVenta.precioUnitario }}</td>
