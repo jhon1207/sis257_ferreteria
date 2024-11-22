@@ -3,12 +3,11 @@ import { IsNumber, IsDateString, IsNotEmpty } from 'class-validator';
 
 export class CreateVentaDto {
   @ApiProperty({
-    description: 'Fecha de la transacción en formato ISO',
-    example: '2024-10-14T10:30:00',
+    example: '2024-10-14',
   })
   @IsNotEmpty({ message: 'El campo fecha es obligatorio' })
   @IsDateString({}, { message: 'El campo fecha debe ser una cadena válida en formato de fecha' })
-  readonly fecha: string;
+  readonly fecha: Date;
 
   @ApiProperty({
     description: 'ID del cliente que realiza la compra',
@@ -16,7 +15,7 @@ export class CreateVentaDto {
   })
   @IsNotEmpty({ message: 'El campo id_cliente es obligatorio' })
   @IsNumber({}, { message: 'El campo id_cliente debe ser de tipo numérico' })
-  readonly id_cliente: number;
+  readonly idCliente: number;
   /*
   @ApiProperty({
     description: 'ID del usuario que registra la venta',
@@ -28,7 +27,6 @@ export class CreateVentaDto {
 */
   @ApiProperty({
     description: 'Monto total de la venta',
-    example: 150.75,
   })
   @IsNotEmpty({ message: 'El campo total es obligatorio' })
   @IsNumber({}, { message: 'El campo total debe ser de tipo numérico' })

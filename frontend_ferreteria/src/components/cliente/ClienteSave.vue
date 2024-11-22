@@ -57,75 +57,31 @@ async function handleSave() {
 
 <template>
   <div class="card flex justify-center">
-    <Dialog
-      v-model:visible="dialogVisible"
-      :header="props.modoEdicion ? 'Editar' : 'Crear'"
-      style="width: 25rem"
-    >
+    <Dialog v-model:visible="dialogVisible" :header="props.modoEdicion ? 'Editar' : 'Crear'" style="width: 25rem">
       <div class="flex items-center gap-4 mb-4">
         <label for="nombre" class="font-semibold w-4">Nombre</label>
-        <InputText
-          id="nombre"
-          v-model="cliente.nombre"
-          class="flex-auto"
-          autocomplete="off"
-          autofocus
-        />
+        <InputText id="nombre" v-model="cliente.nombre" class="flex-auto" autocomplete="off" autofocus />
       </div>
       <div class="flex items-center gap-4 mb-4">
         <label for="apellido" class="font-semibold w-4">Apellido</label>
-        <InputText
-          id="apellido"
-          v-model="cliente.apellido"
-          class="flex-auto"
-          autocomplete="off"
-          autofocus
-        />
+        <InputText id="apellido" v-model="cliente.apellido" class="flex-auto" autocomplete="off" autofocus />
       </div>
       <div class="flex items-center gap-4 mb-4">
         <label for="telefono" class="font-semibold w-4">Telefono</label>
-        <InputText
-          id="telefono"
-          v-model="cliente.telefono"
-          class="flex-auto"
-          autocomplete="off"
-          autofocus
-        />
+        <InputText id="telefono" v-model="cliente.telefono" class="flex-auto" autocomplete="off" autofocus />
       </div>
       <div class="flex items-center gap-4 mb-4">
         <label for="email" class="font-semibold w-4">E-mail</label>
-        <InputText
-          id="email"
-          v-model="cliente.email"
-          class="flex-auto"
-          autocomplete="off"
-          autofocus
-        />
+        <InputText id="email" v-model="cliente.email" class="flex-auto" autocomplete="off" autofocus />
       </div>
       <div class="flex items-center gap-4 mb-4">
         <label for="direccion" class="font-semibold w-4">Direccion</label>
-        <InputText
-          id="direccion"
-          v-model="cliente.direccion"
-          class="flex-auto"
-          autocomplete="off"
-          autofocus
-        />
+        <InputText id="direccion" v-model="cliente.direccion" class="flex-auto" autocomplete="off" autofocus />
       </div>
       <div class="flex justify-end gap-2">
-        <Button
-          type="button"
-          label="Cancelar"
-          icon="pi pi-times"
-          severity="secondary"
-          @click="dialogVisible = false"
-        ></Button>
-        <Button
-          type="button"
-          label="Guardar"
-          icon="pi pi-save"
-          @click="handleSave"
-        ></Button>
+        <Button type="button" label="Cancelar" icon="pi pi-times" severity="secondary"
+          @click="dialogVisible = false"></Button>
+        <Button type="button" label="Guardar" icon="pi pi-save" @click="handleSave"></Button>
       </div>
     </Dialog>
   </div>

@@ -59,40 +59,33 @@ defineExpose({ obtenerLista })
           <td>{{ producto.precio }}</td>
           <td>{{ producto.stock }}</td>
           <td>
-            <Button
-              icon="pi pi-pencil"
-              aria-label="Editar"
-              text
-              @click="emitirEdicion(producto)"
-            />
-            <Button
-              icon="pi pi-trash"
-              aria-label="Eliminar"
-              text
-              @click="mostrarEliminarConfirm(producto)"
-            />
+            <Button icon="pi pi-pencil" aria-label="Editar" text @click="emitirEdicion(producto)" />
+            <Button icon="pi pi-trash" aria-label="Eliminar" text @click="mostrarEliminarConfirm(producto)" />
           </td>
         </tr>
       </tbody>
     </table>
 
-    <Dialog
-      v-model:visible="mostrarConfirmDialog"
-      header="Confirmar Eliminación"
-      :style="{ width: '25rem' }"
-    >
+    <Dialog v-model:visible="mostrarConfirmDialog" header="Confirmar Eliminación" :style="{ width: '25rem' }">
       <p>¿Estás seguro de que deseas eliminar este registro?</p>
       <div class="flex justify-end gap-2">
-        <Button
-          type="button"
-          label="Cancelar"
-          severity="secondary"
-          @click="mostrarConfirmDialog = false"
-        />
+        <Button type="button" label="Cancelar" severity="secondary" @click="mostrarConfirmDialog = false" />
         <Button type="button" label="Eliminar" @click="eliminar" />
       </div>
     </Dialog>
   </div>
 </template>
 
-<style scoped></style>
+<style scoped>
+table {
+  border-collapse: collapse;
+  width: 100%;
+}
+
+th,
+td {
+  border: 1px solid #ccc;
+  padding: 8px;
+  text-align: left;
+}
+</style>

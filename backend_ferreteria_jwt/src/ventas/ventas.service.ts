@@ -17,7 +17,7 @@ export class VentasService {
     const existe = await this.ventasRepository.findOne({
       where: {
         total: createVentaDto.total,
-        cliente: { id: createVentaDto.id_cliente },
+        cliente: { id: createVentaDto.idCliente },
       },
       relations: ['cliente'],
     });
@@ -28,7 +28,7 @@ export class VentasService {
 
     const ventaNueva = this.ventasRepository.create({
       total: createVentaDto.total,
-      cliente: { id: createVentaDto.id_cliente },
+      cliente: { id: createVentaDto.idCliente },
     });
 
     return this.ventasRepository.save(ventaNueva);
@@ -53,7 +53,7 @@ export class VentasService {
   async update(id: number, updateVentaDto: UpdateVentaDto): Promise<Venta> {
     const venta = await this.findOne(id);
     const ventaUpdate = Object.assign(venta, updateVentaDto);
-    ventaUpdate.cliente = { id: updateVentaDto.id_cliente } as Cliente;
+    ventaUpdate.cliente = { id: updateVentaDto.idCliente } as Cliente;
     return this.ventasRepository.save(ventaUpdate);
   }
 

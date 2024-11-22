@@ -4,7 +4,6 @@ import type { Categoria } from '@/models/categoria'
 import http from '@/plugins/axios'
 import Button from 'primevue/button'
 import Dialog from 'primevue/dialog'
-import InputMask from 'primevue/inputmask'
 import InputText from 'primevue/inputtext'
 import Select from 'primevue/select'
 import { computed, ref, watch } from 'vue'
@@ -52,6 +51,7 @@ async function obtenerCategorias() {
 
 async function handleSave() {
   try {
+    producto.value.categoria = categoria.value;
     const body = {
       idCategoria: producto.value.categoria.id,
       nombreProducto: producto.value.nombreProducto,

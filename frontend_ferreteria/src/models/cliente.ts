@@ -1,8 +1,12 @@
+import type { Venta } from "./venta"
+
 export interface Cliente {
-  id_venta: number
+  id: number
+  idVenta: number
   nombre: string
   apellido: string
   telefono: string
   email: string
   direccion: string
+  venta: Venta
 }

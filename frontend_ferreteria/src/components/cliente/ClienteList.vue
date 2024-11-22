@@ -25,7 +25,7 @@ function mostrarEliminarConfirm(cliente: Cliente) {
 }
 
 async function eliminar() {
-  await http.delete(`${ENDPOINT}/${clienteDelete.value?.id_venta}`)
+  await http.delete(`${ENDPOINT}/${clienteDelete.value?.id}`)
   obtenerLista()
   mostrarConfirmDialog.value = false
 }
@@ -51,7 +51,7 @@ defineExpose({ obtenerLista })
         </tr>
       </thead>
       <tbody>
-        <tr v-for="(cliente, index) in clientes" :key="cliente.id_venta">
+        <tr v-for="(cliente, index) in clientes" :key="cliente.id">
           <td>{{ index + 1 }}</td>
           <td>{{ cliente.nombre }}</td>
           <td>{{ cliente.apellido }}</td>
@@ -76,4 +76,16 @@ defineExpose({ obtenerLista })
   </div>
 </template>
 
-<style scoped></style>
+<style scoped>
+table {
+  border-collapse: collapse;
+  width: 100%;
+}
+
+th,
+td {
+  border: 1px solid #ccc;
+  padding: 8px;
+  text-align: left;
+}
+</style>

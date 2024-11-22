@@ -2,12 +2,12 @@ import type { Producto } from './producto'
 import type { Venta } from './venta'
 
 export interface DetalleVenta {
-  id_detalle: string
-  id_venta: string
-  id_producto: string
+  id: number
+  idVenta: number
+  idProducto: number
   cantidad: number
-  precio_unitario: number
-  subtotal: number
+  precioUnitario: number
+  subTotal: number
   producto: Producto
   venta: Venta
 }

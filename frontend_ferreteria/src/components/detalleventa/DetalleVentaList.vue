@@ -3,109 +3,89 @@ import type { DetalleVenta } from '@/models/detalleventa'
 import http from '@/plugins/axios'
 import Button from 'primevue/button'
 import Dialog from 'primevue/dialog'
-import { ref, watch } from 'vue'
+import { onMounted, ref } from 'vue'
 
-const ENDPOINT = 'detalle_venta'
+const ENDPOINT = 'detalles-ventas'
 const detalleVenta = ref<DetalleVenta[]>([])
 const emit = defineEmits(['edit'])
-const detalleDelete = ref<DetalleVenta | null>(null)
+const detalleVentaDelete = ref<DetalleVenta | null>(null)
 const mostrarConfirmDialog = ref<boolean>(false)
-const ventaId = ref<number | null>(null)
 
 async function obtenerLista() {
-  if (ventaId.value) {
-    detalleVenta.value = await http
-      .get(`${ENDPOINT}?id_venta=${ventaId.value}`)
-      .then(response => response.data)
-  }
+  detalleVenta.value = await http.get(ENDPOINT).then(response => response.data)
 }
 
-function setVentaId(id: number) {
-  ventaId.value = id
-  obtenerLista()
+function emitirEdicion(detalleVenta: DetalleVenta) {
+  emit('edit', detalleVenta)
 }
 
-function emitirEdicion(detalle: DetalleVenta) {
-  emit('edit', detalle)
-}
-
-function mostrarEliminarConfirm(detalle: DetalleVenta) {
-  detalleDelete.value = detalle
+function mostrarEliminarConfirm(detalleVenta: DetalleVenta) {
+  detalleVentaDelete.value = detalleVenta
   mostrarConfirmDialog.value = true
 }
 
 async function eliminar() {
-  await http.delete(`${ENDPOINT}/${detalleDelete.value?.id_detalle}`)
-  await obtenerLista()
+  await http.delete(`${ENDPOINT}/${detalleVentaDelete.value?.id}`)
+  obtenerLista()
   mostrarConfirmDialog.value = false
 }
 
-watch(ventaId, newId => {
-  if (newId) {
-    obtenerLista()
-  }
+onMounted(() => {
+  obtenerLista()
 })
-
-defineExpose({ setVentaId })
+defineExpose({ obtenerLista })
 </script>
 
 <template>
   <div>
-    <h2>Detalles de Venta</h2>
     <table>
       <thead>
         <tr>
           <th>Nro.</th>
-          <th>ID Producto</th>
+          <th>Ventas</th>
+          <th>Productos</th>
           <th>Cantidad</th>
           <th>Precio Unitario</th>
-          <th>Subtotal</th>
+          <th>SubTotal</th>
           <th>Acciones</th>
         </tr>
       </thead>
       <tbody>
-        <tr v-for="(detalle, index) in detalleVenta" :key="detalle.id_detalle">
-          <!-- Use detalleVenta here -->
+        <tr v-for="(detalleVenta, index) in detalleVenta" :key="detalleVenta.id">
           <td>{{ index + 1 }}</td>
-          <td>{{ detalle.id_producto }}</td>
-          <td>{{ detalle.cantidad }}</td>
-          <td>{{ detalle.precio_unitario.toFixed(2) }}</td>
-          <td>{{ detalle.subtotal.toFixed(2) }}</td>
+          <td>{{ detalleVenta.venta.total }}</td>
+          <td>{{ detalleVenta.producto.nombreProducto }}</td>
+          <td>{{ detalleVenta.cantidad }}</td>
+          <td>{{ detalleVenta.precioUnitario }}</td>
+          <td>{{ detalleVenta.subTotal }}</td>
           <td>
-            <Button
-              icon="pi pi-pencil"
-              aria-label="Editar"
-              text
-              @click="emitirEdicion(detalle)"
-            />
-            <Button
-              icon="pi pi-trash"
-              aria-label="Eliminar"
-              text
-              @click="mostrarEliminarConfirm(detalle)"
-            />
+            <Button icon="pi pi-pencil" aria-label="Editar" text @click="emitirEdicion(detalleVenta)" />
+            <Button icon="pi pi-trash" aria-label="Eliminar" text @click="mostrarEliminarConfirm(detalleVenta)" />
           </td>
         </tr>
       </tbody>
     </table>
 
-    <Dialog
-      v-model:visible="mostrarConfirmDialog"
-      header="Confirmar Eliminación"
-      :style="{ width: '25rem' }"
-    >
+    <Dialog v-model:visible="mostrarConfirmDialog" header="Confirmar Eliminación" :style="{ width: '25rem' }">
       <p>¿Estás seguro de que deseas eliminar este registro?</p>
       <div class="flex justify-end gap-2">
-        <Button
-          type="button"
-          label="Cancelar"
-          severity="secondary"
-          @click="mostrarConfirmDialog = false"
-        />
+        <Button type="button" label="Cancelar" severity="secondary" @click="mostrarConfirmDialog = false" />
         <Button type="button" label="Eliminar" @click="eliminar" />
       </div>
     </Dialog>
   </div>
 </template>
 
-<style scoped></style>
+<style scoped>
+table {
+  border-collapse: collapse;
+  width: 100%;
+}
+
+th,
+td {
+  border: 1px solid #ccc;
+  padding: 8px;
+  text-align: left;
+}
+</style>

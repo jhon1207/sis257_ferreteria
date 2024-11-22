@@ -20,18 +20,18 @@ export class DetallesVentasService {
 
   async create(createDetallesVentaDto: CreateDetallesVentaDto): Promise<DetalleVenta> {
     const venta = await this.ventasRepository.findOneBy({
-      id: createDetallesVentaDto.id_venta,
+      id: createDetallesVentaDto.idVenta,
     });
     if (!venta) {
-      throw new NotFoundException(`La venta con ID ${createDetallesVentaDto.id_venta} no existe`);
+      throw new NotFoundException(`La venta con ID ${createDetallesVentaDto.idVenta} no existe`);
     }
 
     const producto = await this.productosRepository.findOneBy({
-      id: createDetallesVentaDto.id_producto,
+      id: createDetallesVentaDto.idProducto,
     });
     if (!producto) {
       throw new NotFoundException(
-        `El producto con ID ${createDetallesVentaDto.id_producto} no existe`,
+        `El producto con ID ${createDetallesVentaDto.idProducto} no existe`,
       );
     }
 
@@ -39,8 +39,8 @@ export class DetallesVentasService {
       venta,
       producto,
       cantidad: createDetallesVentaDto.cantidad,
-      precio_unitario: createDetallesVentaDto.precio_unitario,
-      subtotal: createDetallesVentaDto.subtotal,
+      precioUnitario: createDetallesVentaDto.precioUnitario,
+      subTotal: createDetallesVentaDto.subTotal,
     });
 
     return this.detallesVentasRepository.save(detalleVenta);
