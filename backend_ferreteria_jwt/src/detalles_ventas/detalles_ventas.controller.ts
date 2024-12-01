@@ -1,13 +1,14 @@
-import { Controller, Get, Post, Body, Patch, Param, Delete, UseGuards } from '@nestjs/common';
+import { Controller, Get, Post, Body, Patch, Param, Delete } from '@nestjs/common';
 import { DetallesVentasService } from './detalles_ventas.service';
 import { CreateDetallesVentaDto } from './dto/create-detalles_venta.dto';
 import { UpdateDetallesVentaDto } from './dto/update-detalles_venta.dto';
-import { ApiBearerAuth, ApiTags } from '@nestjs/swagger';
-import { JwtAuthGuard } from 'src/auth/guards/jwt-auth.guard';
+import { ApiTags } from '@nestjs/swagger';
+// import { ApiBearerAuth, ApiTags } from '@nestjs/swagger';
+// import { JwtAuthGuard } from 'src/auth/guards/jwt-auth.guard';
 
 @ApiTags('detalles-ventas')
-@ApiBearerAuth()
-@UseGuards(JwtAuthGuard)
+// @ApiBearerAuth()
+// @UseGuards(JwtAuthGuard)
 @Controller('detalles-ventas')
 export class DetallesVentasController {
   constructor(private readonly detallesVentasService: DetallesVentasService) {}

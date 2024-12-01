@@ -39,7 +39,7 @@ export class DetallesVentasService {
   }
 
   async findAll(): Promise<DetalleVenta[]> {
-    return this.detallesVentasRepository.find({ relations: [ 'producto' ] });
+    return this.detallesVentasRepository.find({ relations: ['producto'] });
   }
 
   async findOne(id: number): Promise<DetalleVenta> {

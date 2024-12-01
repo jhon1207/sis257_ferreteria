@@ -43,10 +43,7 @@ export class UsuariosService {
     return usuario;
   }
 
-  async update(
-    id: number,
-    updateUsuarioDto: UpdateUsuarioDto,
-  ): Promise<Usuario> {
+  async update(id: number, updateUsuarioDto: UpdateUsuarioDto): Promise<Usuario> {
     const usuario = await this.findOne(id);
     const usuarioUpdate = Object.assign(usuario, updateUsuarioDto);
     return this.usuariosRepository.save(usuarioUpdate);

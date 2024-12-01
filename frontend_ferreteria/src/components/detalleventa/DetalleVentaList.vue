@@ -50,24 +50,46 @@ defineExpose({ obtenerLista })
         </tr>
       </thead>
       <tbody>
-        <tr v-for="(detalleVenta, index) in detalleVenta" :key="detalleVenta.id">
+        <tr
+          v-for="(detalleVenta, index) in detalleVenta"
+          :key="detalleVenta.id"
+        >
           <td>{{ index + 1 }}</td>
           <td>{{ detalleVenta.producto.nombreProducto }}</td>
           <td>{{ detalleVenta.cantidad }}</td>
           <td>{{ detalleVenta.precioUnitario }}</td>
           <td>{{ detalleVenta.subTotal }}</td>
           <td>
-            <Button icon="pi pi-pencil" aria-label="Editar" text @click="emitirEdicion(detalleVenta)" />
-            <Button icon="pi pi-trash" aria-label="Eliminar" text @click="mostrarEliminarConfirm(detalleVenta)" />
+            <Button
+              icon="pi pi-pencil"
+              aria-label="Editar"
+              text
+              @click="emitirEdicion(detalleVenta)"
+            />
+            <Button
+              icon="pi pi-trash"
+              aria-label="Eliminar"
+              text
+              @click="mostrarEliminarConfirm(detalleVenta)"
+            />
           </td>
         </tr>
       </tbody>
     </table>
 
-    <Dialog v-model:visible="mostrarConfirmDialog" header="Confirmar Eliminación" :style="{ width: '25rem' }">
+    <Dialog
+      v-model:visible="mostrarConfirmDialog"
+      header="Confirmar Eliminación"
+      :style="{ width: '25rem' }"
+    >
       <p>¿Estás seguro de que deseas eliminar este registro?</p>
       <div class="flex justify-end gap-2">
-        <Button type="button" label="Cancelar" severity="secondary" @click="mostrarConfirmDialog = false" />
+        <Button
+          type="button"
+          label="Cancelar"
+          severity="secondary"
+          @click="mostrarConfirmDialog = false"
+        />
         <Button type="button" label="Eliminar" @click="eliminar" />
       </div>
     </Dialog>

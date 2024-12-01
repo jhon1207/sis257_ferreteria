@@ -16,7 +16,7 @@ export class CreateDetallesVentaDto {
   @IsNotEmpty({ message: 'El campo subtotal no debe ser vacío' })
   @IsNumber({}, { message: 'El campo subtotal debe ser un número' })
   readonly subTotal: number;
-/*
+  /*
   @ApiProperty({
     description: 'ID de la venta que realiza la compra',
   })

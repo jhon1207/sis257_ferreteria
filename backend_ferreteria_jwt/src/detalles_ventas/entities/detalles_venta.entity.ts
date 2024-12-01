@@ -15,7 +15,7 @@ export class DetalleVenta {
 
   @Column('decimal', { precision: 10, scale: 2, nullable: false })
   subTotal: number;
-/*
+  /*
   @ManyToOne(() => Venta, venta => venta.detalleventas)
   @JoinColumn({ name: 'id_venta', referencedColumnName: 'id' })
   venta: Venta;

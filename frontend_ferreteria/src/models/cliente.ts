@@ -1,4 +1,4 @@
-import type { Venta } from "./venta"
+import type { Venta } from './venta'
 
 export interface Cliente {
   id: number

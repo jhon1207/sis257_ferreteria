@@ -28,10 +28,18 @@ function handleGuardar() {
 </script>
 
 <template>
-  <div>
-    <h1>Categorias</h1>
-    <Button label="Crear Nuevo" icon="pi pi-plus" @click="hableCreate" />
-    <CategoriaList ref="categoriaListRef" @edit="handleEdit" />
+  <div class="categoria-container">
+    <h1 class="categoria-titulo">Categorías</h1>
+    <Button
+      label="Crear Nuevo"
+      icon="pi pi-plus"
+      class="crear-btn"
+      @click="hableCreate"
+    />
+    <CategoriaList
+      ref="categoriaListRef"
+      @edit="handleEdit"
+    />
     <CategoriaSave
       :mostrar="mostrarDialog"
       :categoria="categoriaEdit"
@@ -42,4 +50,28 @@ function handleGuardar() {
   </div>
 </template>
 
-<style scoped></style>
+
+<style scoped>
+
+.categoria-titulo {
+  color: #940f0f; /* Texto completamente negro */
+  text-align: center;
+  margin-bottom: 20px;
+  font-weight: bold;
+}
+
+.crear-btn {
+  display: block;
+  margin: 0 auto 20px;
+  background-color: #28a745; /* Botón verde */
+  color: white;
+  border: none;
+  border-radius: 5px;
+  font-size: 16px;
+}
+
+.crear-btn:hover {
+  background-color: #218838; /* Color más oscuro al pasar el ratón */
+  cursor: pointer;
+}
+</style>

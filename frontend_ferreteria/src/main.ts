@@ -1,4 +1,4 @@
-import './assets/main.css'
+//import './assets/main.css'
 
 import { createApp } from 'vue'
 import { createPinia } from 'pinia'
@@ -7,9 +7,13 @@ import Aura from '@primevue/themes/aura'
 import 'primeicons/primeicons.css'
 import 'primeflex/primeflex.min.css'
 
+import 'jquery-nice-select/css/nice-select.css' 
+import 'jquery-nice-select' 
+// Importación de componentes principales
 import App from './App.vue'
 import router from './router'
 
+// Crear la aplicación
 const app = createApp(App)
 
 app.use(createPinia())
@@ -20,4 +24,5 @@ app.use(PrimeVue, {
   },
 })
 
+// Montar la aplicación
 app.mount('#app')

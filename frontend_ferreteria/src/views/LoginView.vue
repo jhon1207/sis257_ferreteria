@@ -11,71 +11,118 @@ function onSubmit() {
   authStore.login(usuario.value, clave.value).catch(() => (error.value = true))
 }
 </script>
-
 <template>
-  <div class="my-5 pt-5">
-    <h1 class="text-center">Iniciar Sesión</h1>
-    <form class="form" @submit.prevent="onSubmit">
-      <label class="form-label">Usuario:</label>
-      <input
-        v-model="usuario"
-        type="text"
-        class="form-input"
-        placeholder="Usuario"
-        autofocus
-      />
+  <div class="login-container">
+    <div class="form-container">
+      <h1 class="text-center text-white mb-5">
+        Iniciar Sesión
+      </h1>
+      <form class="form" @submit.prevent="onSubmit">
+        <!-- Usuario -->
+        <div class="form-group">
+          <label class="form-label">Usuario:</label>
+          <div class="input-group">
+            <input
+              v-model="usuario"
+              type="text"
+              class="form-input"
+              placeholder="Usuario"
+              autofocus
+            />
+          </div>
+        </div>
 
-      <label class="form-label">Contraseña:</label>
-      <input
-        v-model="clave"
-        type="password"
-        class="form-input"
-        placeholder="Contraseña"
-      />
+        <!-- Contraseña -->
+        <div class="form-group">
+          <label class="form-label">Contraseña:</label>
+          <div class="input-group">
+            <input
+              v-model="clave"
+              type="password"
+              class="form-input"
+              placeholder="Contraseña"
+            />
+          </div>
+        </div>
 
-      <p v-if="error" class="text-danger">Usuario y/o contraseña incorrectos</p>
-      <input type="submit" class="form-submit" value="Ingresar" />
-    </form>
+        <!-- Error message -->
+        <p v-if="error" class="text-danger text-center">Usuario y/o contraseña incorrectos</p>
+
+        <!-- Submit button -->
+        <div class="text-center">
+          <input type="submit" class="form-submit" value="Ingresar" />
+        </div>
+      </form>
+    </div>
   </div>
 </template>
 
 <style>
-.form {
-  margin: 1.5rem auto;
+.login-container {
+  background-image: url('../assets/img/login.jpg'); /* Ruta de la imagen de fondo */
+  background-size: cover;
+  background-position: center;
+  min-height: 100vh;
   display: flex;
-  flex-direction: column;
   justify-content: center;
-  width: 20%;
-  min-width: 350px;
-  max-width: 100%;
-  background: rgba(19, 35, 47, 0.9);
-  border-radius: 5px;
+  align-items: center;
+}
+
+.form-container {
+  width: 100%;
+  max-width: 450px;
+  background: rgba(74, 85, 93, 0.8); /* Fondo oscuro semitransparente */
   padding: 40px;
-  box-shadow: 0 4px 10px 4px rgba(0, 0, 0, 0.3);
+  border-radius: 15px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.6);
+}
+
+h1 {
+  font-size: 2.2rem;
+  font-weight: 600;
+}
+
+.form-group {
+  margin-bottom: 1.5rem;
 }
 
 .form-label {
-  margin-top: 2rem;
   color: white;
+  font-size: 1rem;
   margin-bottom: 0.5rem;
+}
+
+.input-group {
+  display: flex;
+  align-items: center;
 }
 
 .form-input {
   padding: 10px 15px;
   background: none;
-  background-image: none;
   border: 1px solid white;
   color: white;
+  border-radius: 5px;
+  width: 100%;
 }
 
 .form-submit {
   background: #ee5007;
   border: none;
-  border-radius: 5rem;
+  border-radius: 25px;
   color: white;
-  margin-top: 3rem;
-  padding: 1rem 0;
+  width: 100%;
+  padding: 1rem;
   cursor: pointer;
+  font-size: 1.1rem;
   transition: background 0.2s;
+}
+
+.form-submit:hover {
+  background: #d64500;
+}
+
+.text-danger {
+  font-size: 0.9rem;
 }
 </style>

@@ -28,9 +28,14 @@ function handleGuardar() {
 </script>
 
 <template>
-  <div>
-    <h1>Ventas</h1>
-    <Button label="Crear Nueva Venta" icon="pi pi-plus" @click="handleCreate" />
+  <div class="venta-container">
+    <h1 class="venta-titulo">Ventas</h1>
+    <Button
+      class="crear-btn"
+      label="Crear Nueva Venta"
+      icon="pi pi-plus"
+      @click="handleCreate"
+    />
     <VentaList ref="ventaListRef" @edit="handleEdit" />
     <VentaSave
       :mostrar="mostrarDialog"
@@ -42,4 +47,35 @@ function handleGuardar() {
   </div>
 </template>
 
-<style scoped></style>
+
+<style scoped>
+.venta-container {
+  background-color: rgba(255, 255, 255, 0.8); /* Fondo blanco con transparencia */
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2); /* Sombra para destacar */
+}
+
+.venta-titulo {
+  color: #940f0f; /* Rojo oscuro para el título */
+  text-align: center;
+  margin-bottom: 20px;
+  font-weight: bold;
+}
+
+.crear-btn {
+  display: block;
+  margin: 0 auto 20px;
+  background-color: #28a745; /* Botón verde */
+  color: white;
+  border: none;
+  border-radius: 5px;
+  font-size: 16px;
+}
+
+.crear-btn:hover {
+  background-color: #218838; /* Color más oscuro al pasar el ratón */
+  cursor: pointer;
+}
+</style>
+

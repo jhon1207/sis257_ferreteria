@@ -1,6 +1,3 @@
-import 'owl.carousel/dist/assets/owl.carousel.css'
-import 'owl.carousel'
-import WOW from 'wowjs'
 ;(function ($) {
   'use strict'
 
