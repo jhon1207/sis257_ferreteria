@@ -55,8 +55,6 @@ async function handleSave() {
     const body = {
       idProducto: detalleVenta.value.producto.id,
       cantidad: detalleVenta.value.cantidad,
-      precioUnitario: detalleVenta.value.precioUnitario,
-      subTotal: detalleVenta.value.subTotal,
     }
     if (props.modoEdicion) {
       await http.patch(`${ENDPOINT}/${detalleVenta.value.id}`, body)
@@ -84,68 +82,21 @@ watch(
 
 <template>
   <div class="card flex justify-center">
-    <Dialog
-      v-model:visible="dialogVisible"
-      :header="(props.modoEdicion ? 'Editar' : 'Crear') + ' DetalleVenta'"
-      style="width: 25rem"
-    >
+    <Dialog v-model:visible="dialogVisible" :header="(props.modoEdicion ? 'Editar' : 'Crear') + ' DetalleVenta'"
+      style="width: 25rem">
       <div class="flex items-center gap-4 mb-4">
         <label for="producto" class="font-semibold w-4">Productos</label>
-        <Select
-          id="producto"
-          v-model="detalleVenta.producto"
-          :options="productos"
-          optionLabel="nombreProducto"
-          class="flex-auto"
-          autofocus
-        />
+        <Select id="producto" v-model="detalleVenta.producto" :options="productos" optionLabel="nombreProducto"
+          class="flex-auto" autofocus />
       </div>
       <div class="flex items-center gap-4 mb-4">
         <label for="cantidad" class="font-semibold w-4">Cantidad</label>
-        <input
-          type="number"
-          class="form-control"
-          v-model="detalleVenta.cantidad"
-          placeholder="cantidad"
-          required
-        />
-      </div>
-      <div class="flex items-center gap-4 mb-4">
-        <label for="preciounitario" class="font-semibold w-4"
-          >Precio Unitario</label
-        >
-        <input
-          type="number"
-          class="form-control"
-          v-model="detalleVenta.precioUnitario"
-          placeholder="preciounitario"
-          required
-        />
-      </div>
-      <div class="flex items-center gap-4 mb-4">
-        <label for="subtotal" class="font-semibold w-4">subTotal</label>
-        <input
-          type="number"
-          class="form-control"
-          v-model="detalleVenta.subTotal"
-          placeholder="subtotal"
-          required
-        />
+        <input type="number" class="form-control" v-model="detalleVenta.cantidad" placeholder="cantidad" required />
       </div>
       <div class="flex justify-end gap-2">
-        <Button
-          type="button"
-          label="Cancelar"
-          icon="pi pi-times"
-          severity="secondary"
-          @click="dialogVisible = false"
-        ></Button>
-        <Button
-          type="button"
-          label="Guardar"
-          icon="pi pi-save"
-          @click="handleSave"
-        ></Button>
+        <Button type="button" label="Cancelar" icon="pi pi-times" severity="secondary"
+          @click="dialogVisible = false"></Button>
+        <Button type="button" label="Guardar" icon="pi pi-save" @click="handleSave"></Button>
       </div>
     </Dialog>
   </div>

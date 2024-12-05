@@ -9,17 +9,17 @@ export class DetalleVenta {
 
   @Column('int', { nullable: false })
   cantidad: number;
-
+/*
   @Column('decimal', { precision: 10, scale: 2, nullable: false })
   precioUnitario: number;
 
   @Column('decimal', { precision: 10, scale: 2, nullable: false })
   subTotal: number;
-  /*
+  */
   @ManyToOne(() => Venta, venta => venta.detalleventas)
   @JoinColumn({ name: 'id_venta', referencedColumnName: 'id' })
   venta: Venta;
-*/
+
   @ManyToOne(() => Producto, producto => producto.detalleventas)
   @JoinColumn({ name: 'id_producto', referencedColumnName: 'id' })
   producto: Producto;

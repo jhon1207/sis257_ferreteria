@@ -15,19 +15,19 @@ export class Cliente {
   @PrimaryGeneratedColumn()
   id: number;
 
-  @Column('varchar', { length: 100, nullable: false })
-  nombre: string;
-
+  @Column('varchar', { name: 'nombre_apellido', length: 100, nullable:true})
+  nombreApellido: string;
+  /*
   @Column('varchar', { length: 100, nullable: true })
   apellido: string;
-
-  @Column('varchar', { length: 20, nullable: false })
+  */
+  @Column('varchar', { length: 20 })
   telefono: string;
 
-  @Column('varchar', { length: 255, nullable: true })
+  @Column('varchar', { length: 255 })
   email: string;
 
-  @Column('varchar', { length: 100, nullable: false })
+  @Column('varchar', { length: 100 })
   direccion: string;
 
   @CreateDateColumn({ name: 'fecha_creacion' })
@@ -38,7 +38,7 @@ export class Cliente {
 
   @DeleteDateColumn({ name: 'fecha_eliminacion', select: false })
   fechaEliminacion: Date;
-
+  
   @OneToMany(() => Venta, venta => venta.cliente)
-  ventas: Venta[];
+  ventas: Venta[]; 
 }

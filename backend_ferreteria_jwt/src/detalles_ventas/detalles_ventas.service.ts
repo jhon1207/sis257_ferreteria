@@ -7,6 +7,7 @@ import { Repository } from 'typeorm';
 import { Venta } from '../ventas/entities/venta.entity';
 import { Producto } from '../productos/entities/producto.entity';
 
+
 @Injectable()
 export class DetallesVentasService {
   constructor(
@@ -31,8 +32,8 @@ export class DetallesVentasService {
     const detalleVenta = this.detallesVentasRepository.create({
       producto,
       cantidad: createDetallesVentaDto.cantidad,
-      precioUnitario: createDetallesVentaDto.precioUnitario,
-      subTotal: createDetallesVentaDto.subTotal,
+      //precioUnitario: createDetallesVentaDto.precioUnitario,
+      //subTotal: createDetallesVentaDto.subTotal,
     });
 
     return this.detallesVentasRepository.save(detalleVenta);

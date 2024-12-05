@@ -10,8 +10,8 @@ import {
   JoinColumn,
 } from 'typeorm';
 import { Cliente } from '../../clientes/entities/cliente.entity';
-import { Usuario } from '../../usuarios/entities/usuario.entity';
 import { DetalleVenta } from '../../detalles_ventas/entities/detalles_venta.entity'; // Asegúrate de importar DetalleVenta
+import { Producto } from 'src/productos/entities/producto.entity';
 
 @Entity('ventas')
 export class Venta {
@@ -24,16 +24,20 @@ export class Venta {
   @Column('decimal', { precision: 10, scale: 2, nullable: false })
   total: number;
 
-  //@ManyToOne(() => Usuario, usuario => usuario.ventas, { nullable: false })
-  //usuario: Usuario;
-
   @ManyToOne(() => Cliente, cliente => cliente.ventas)
   @JoinColumn({ name: 'id_cliente', referencedColumnName: 'id' })
   cliente: Cliente;
-  /*
+
+  @ManyToOne(() => Producto, producto => producto.ventas)
+  @JoinColumn({ name: 'idProducto', referencedColumnName: 'id' })
+  producto: Producto;
+  
   @OneToMany(() => DetalleVenta, detalleventa => detalleventa.venta)
   detalleventas: DetalleVenta[];
-*/
+
+  @OneToMany(() => DetalleVenta, (detalle) => detalle.venta, { cascade: true })
+  detalles: DetalleVenta[];
+
   @CreateDateColumn({ name: 'fecha_creacion' })
   fechaCreacion: Date;
 

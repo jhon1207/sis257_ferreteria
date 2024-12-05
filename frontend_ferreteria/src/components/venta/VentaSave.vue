@@ -8,6 +8,7 @@ import InputMask from 'primevue/inputmask'
 import InputText from 'primevue/inputtext'
 import Select from 'primevue/select'
 import { computed, ref, watch } from 'vue'
+import type { Producto } from '@/models/producto'
 
 const ENDPOINT = 'ventas'
 const props = defineProps({
@@ -21,8 +22,10 @@ const props = defineProps({
 const emit = defineEmits(['guardar', 'close'])
 
 const clientes = ref<Cliente[]>([])
+const productos = ref<Producto[]>([])
 
 const cliente = ref<Cliente>({} as Cliente)
+const producto = ref<Producto>({} as Producto)
 const venta = ref<Venta>({ ...props.venta })
 
 const dialogVisible = computed({
@@ -47,14 +50,33 @@ watch(
   },
 )
 
+watch(
+  () => props.venta,
+  async newVal => {
+    venta.value = { ...newVal }
+    producto.value = venta.value?.producto ?? ({} as Producto)
+    if (producto.value?.id) {
+      await obtenerProductos()
+      venta.value.producto =
+        productos.value.find(producto => producto.id === venta.value.producto.id) ||
+        ({} as Producto)
+    }
+  },
+)
+
 async function obtenerClientes() {
   clientes.value = await http.get('clientes').then(response => response.data)
+}
+
+async function obtenerProductos() {
+  productos.value = await http.get('productos').then(response => response.data)
 }
 
 async function handleSave() {
   try {
     const body = {
       idCliente: venta.value.cliente.id,
+      idProducto: venta.value.producto.id,
       fecha: venta.value.fecha,
       total: venta.value.total,
     }
@@ -77,6 +99,7 @@ watch(
   nuevoValor => {
     if (nuevoValor) {
       obtenerClientes()
+      obtenerProductos()
     }
   },
 )
@@ -84,57 +107,30 @@ watch(
 
 <template>
   <div class="card flex justify-center">
-    <Dialog
-      v-model:visible="dialogVisible"
-      :header="(props.modoEdicion ? 'Editar' : 'Crear') + ' Venta'"
-      style="width: 25rem"
-    >
+    <Dialog v-model:visible="dialogVisible" :header="(props.modoEdicion ? 'Editar' : 'Crear') + ' Venta'"
+      style="width: 25rem">
       <div class="flex items-center gap-4 mb-4">
         <label for="cliente" class="font-semibold w-4">Clientes</label>
-        <Select
-          id="cliente"
-          v-model="venta.cliente"
-          :options="clientes"
-          optionLabel="nombre"
-          class="flex-auto"
-          autofocus
-        />
+        <Select id="cliente" v-model="venta.cliente" :options="clientes" optionLabel="nombreApellido" class="flex-auto"
+          autofocus />
+      </div>
+      <div class="flex items-center gap-4 mb-4">
+        <label for="producto" class="font-semibold w-4">Productos</label>
+        <Select id="producto" v-model="venta.producto" :options="productos" optionLabel="nombreProducto"
+          class="flex-auto" autofocus />
       </div>
       <div class="flex items-center gap-4 mb-4">
         <label for="fecha" class="font-semibold w-4">Fecha</label>
-        <input
-          type="date"
-          id="fecha"
-          v-model="venta.fecha"
-          class="flex-auto"
-          autocomplete="off"
-          required
-        />
+        <input type="date" id="fecha" v-model="venta.fecha" class="flex-auto" autocomplete="off" required />
       </div>
       <div class="flex items-center gap-4 mb-4">
         <label for="total" class="font-semibold w-4">Total</label>
-        <input
-          type="number"
-          class="form-control"
-          v-model="venta.total"
-          placeholder="total"
-          required
-        />
+        <input type="number" class="form-control" v-model="venta.total" placeholder="total" required />
       </div>
       <div class="flex justify-end gap-2">
-        <Button
-          type="button"
-          label="Cancelar"
-          icon="pi pi-times"
-          severity="secondary"
-          @click="dialogVisible = false"
-        ></Button>
-        <Button
-          type="button"
-          label="Guardar"
-          icon="pi pi-save"
-          @click="handleSave"
-        ></Button>
+        <Button type="button" label="Cancelar" icon="pi pi-times" severity="secondary"
+          @click="dialogVisible = false"></Button>
+        <Button type="button" label="Guardar" icon="pi pi-save" @click="handleSave"></Button>
       </div>
     </Dialog>
   </div>

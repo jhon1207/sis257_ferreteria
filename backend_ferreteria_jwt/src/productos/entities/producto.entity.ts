@@ -1,6 +1,7 @@
 import { Column, Entity, JoinColumn, ManyToOne, OneToMany, PrimaryGeneratedColumn } from 'typeorm';
 import { Categoria } from '../../categorias/entities/categoria.entity';
 import { DetalleVenta } from 'src/detalles_ventas/entities/detalles_venta.entity';
+import { Venta } from 'src/ventas/entities/venta.entity';
 
 @Entity('productos')
 export class Producto {
@@ -25,4 +26,7 @@ export class Producto {
 
   @OneToMany(() => DetalleVenta, detalleventa => detalleventa.producto)
   detalleventas: DetalleVenta[];
+
+  @OneToMany(() => Venta, venta => venta.producto)
+  ventas: Venta[]; 
 }

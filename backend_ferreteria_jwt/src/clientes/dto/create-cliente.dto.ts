@@ -3,19 +3,13 @@ import { IsEmail, IsNotEmpty, IsString, Matches, MaxLength, MinLength } from 'cl
 
 export class CreateClienteDto {
   @ApiProperty()
-  @IsNotEmpty({ message: 'El campo nombre no debe ser vacío' })
-  @IsString({ message: 'El campo nombre debe ser de tipo cadena' })
-  @MaxLength(100, { message: 'El campo nombre no debe ser mayor a 100 caracteres' })
-  @MinLength(2, { message: 'El campo nombre no debe ser menor a 2 caracteres' })
-  readonly nombre: string;
-
-  @ApiProperty()
-  @IsNotEmpty({ message: 'El campo apellido no debe ser vacío' })
-  @IsString({ message: 'El campo apellido debe ser de tipo cadena' })
-  @MaxLength(100, { message: 'El campo apellido no debe ser mayor a 100 caracteres' })
-  @MinLength(2, { message: 'El campo apellido no debe ser menor a 2 caracteres' })
-  readonly apellido: string;
-
+  @IsNotEmpty({ message: 'El campo nombreApellido es obligatorio' })
+  @IsString({ message: 'El campo nombreApellido debe ser de tipo cadena' })
+  @MaxLength(100, {
+    message: 'El campo nombreApellido no debe ser mayor a 100 caracteres',
+  })
+  readonly nombreApellido: string;
+  
   @ApiProperty()
   @IsNotEmpty({ message: 'El campo telefono no debe ser vacío' })
   @IsString({ message: 'El campo telefono debe ser de tipo cadena' })
