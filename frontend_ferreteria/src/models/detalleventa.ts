@@ -1,9 +1,10 @@
 import type { Producto } from './producto'
-//import type { Venta } from './venta'
+import type { Venta } from './venta';
 
 export interface DetalleVenta {
   id?: number;
   idProducto: number;
+  idVenta: number;
   cantidad: number;
   producto?: {
     id: number;
@@ -17,5 +18,6 @@ export interface DetalleVenta {
       descripcion: string;
     };
   };
+  venta: Venta
 }
 
